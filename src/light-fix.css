@@ -1,0 +1,25 @@
+
+/* Force clean light layout overrides */
+[data-bs-theme="light"] .sidebar-wrapper {
+    border-right: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+}
+
+[data-bs-theme="light"] .page-footer {
+    border-top: none !important;
+    box-shadow: none !important;
+}
+
+[data-bs-theme="light"] .top-header .navbar {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+[data-bs-theme="light"] .card,
+[data-bs-theme="light"] .card-body,
+[data-bs-theme="light"] .container,
+[data-bs-theme="light"] .main-wrapper {
+    border: none !important;
+    box-shadow: none !important;
+}
