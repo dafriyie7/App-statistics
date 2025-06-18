@@ -1,13 +1,13 @@
 import React from "react";
 
-const BigRect = () => {
+const AppListingCard = () => {
 	return (
 		<div className="col-12 col-xxl-6 d-flex">
 			<div className="card rounded-4 w-100">
 				<div className="card-body">
 					<div className="d-flex align-items-start justify-content-between mb-3">
 						<div>
-							<h5 className="mb-0">App Activity Log</h5>
+							<h5 className="mb-0">All App Listing</h5>
 						</div>
 						<div className="dropdown">
 							<a
@@ -22,17 +22,17 @@ const BigRect = () => {
 							<ul className="dropdown-menu">
 								<li>
 									<a className="dropdown-item" href="#">
-										View All Logs
+										Add New App
 									</a>
 								</li>
 								<li>
 									<a className="dropdown-item" href="#">
-										Export Report
+										Export List
 									</a>
 								</li>
 								<li>
 									<a className="dropdown-item" href="#">
-										Settings
+										Manage Apps
 									</a>
 								</li>
 							</ul>
@@ -43,110 +43,106 @@ const BigRect = () => {
 						<table className="table align-middle mb-0 table-striped">
 							<thead>
 								<tr>
-									<th>Date</th>
-									<th>App Name</th>
-									<th>Activity</th>
+									<th>App</th>
+									<th>Category</th>
 									<th>Status</th>
+									<th>Hours Used</th>
 								</tr>
 							</thead>
 							<tbody>
 								{[
 									{
-										date: "16 Jun, 2025",
-										time: "2:15 PM",
 										name: "Spotify",
 										icon: "assets/images/apps/07.png",
-										activity: "Crash Report",
-										status: "Failed",
+										category: "Music & Audio",
+										status: "Active",
+										updated: "128",
 									},
 									{
-										date: "15 Jun, 2025",
-										time: "10:05 AM",
 										name: "Behance",
 										icon: "assets/images/apps/behance.png",
-										activity: "Analytics Synced",
-										status: "Success",
+										category: "Design",
+										status: "Inactive",
+										updated: "52",
 									},
 									{
-										date: "15 Jun, 2025",
-										time: "9:45 AM",
 										name: "Google Drive",
 										icon: "assets/images/apps/05.png",
-										activity: "Deployment",
-										status: "Pending",
+										category: "Productivity",
+										status: "Active",
+										updated: "212",
 									},
 									{
-										date: "14 Jun, 2025",
-										time: "6:30 PM",
 										name: "Apple Music",
 										icon: "assets/images/apps/apple.png",
-										activity: "Version Update",
-										status: "Success",
+										category: "Music & Audio",
+										status: "Pending",
+										updated: "83",
 									},
 									{
-										date: "14 Jun, 2025",
-										time: "1:10 PM",
 										name: "Paystack",
 										icon: "assets/images/apps/paypal.png",
-										activity: "Webhook Setup",
-										status: "Success",
+										category: "Finance",
+										status: "Active",
+										updated: "157",
 									},
-								].map((log, idx) => (
+								].map((app, idx) => (
 									<tr key={idx}>
-										<td>
-											<h6 className="mb-0">{log.date}</h6>
-											<p className="mb-0">{log.time}</p>
-										</td>
 										<td>
 											<div className="d-flex align-items-center gap-3">
 												<img
-													src={log.icon}
+													src={app.icon}
 													width="35"
-													alt=""
+													alt={app.name}
 												/>
 												<div>
 													<h6 className="mb-0">
-														{log.name}
+														{app.name}
 													</h6>
 												</div>
 											</div>
 										</td>
 										<td>
 											<p className="mb-0">
-												{log.activity}
+												{app.category}
 											</p>
 										</td>
 										<td>
 											<div
 												className={`card-lable text-${
-													log.status === "Success"
+													app.status === "Active"
 														? "success"
-														: log.status ===
-														  "Failed"
-														? "danger"
+														: app.status ===
+														  "Inactive"
+														? "secondary"
 														: "warning"
 												} bg-${
-													log.status === "Success"
+													app.status === "Active"
 														? "success"
-														: log.status ===
-														  "Failed"
-														? "danger"
+														: app.status ===
+														  "Inactive"
+														? "secondary"
 														: "warning"
 												} bg-opacity-10`}
 											>
 												<p
 													className={`mb-0 text-${
-														log.status === "Success"
+														app.status === "Active"
 															? "success"
-															: log.status ===
-															  "Failed"
-															? "danger"
+															: app.status ===
+															  "Inactive"
+															? "secondary"
 															: "warning"
 													}`}
 												>
-													{log.status}
+													{app.status}
 												</p>
 											</div>
+										</td>
+										<td>
+											<p className="mb-0">
+												{app.updated} hrs
+											</p>
 										</td>
 									</tr>
 								))}
@@ -159,4 +155,4 @@ const BigRect = () => {
 	);
 };
 
-export default BigRect;
+export default AppListingCard;

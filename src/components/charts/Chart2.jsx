@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
 
+// Chart Component
 const ChartComponent = ({ chartId, config, createGradients }) => {
 	const chartRef = useRef(null);
 	const chartInstance = useRef(null);
@@ -11,7 +12,7 @@ const ChartComponent = ({ chartId, config, createGradients }) => {
 			createGradients(ctx, config);
 		}
 		chartInstance.current = new Chart(ctx, config);
-		return () => chartInstance.current.destroy();
+		return () => chartInstance.current?.destroy();
 	}, [config, createGradients]);
 
 	return (
@@ -23,6 +24,7 @@ const ChartComponent = ({ chartId, config, createGradients }) => {
 	);
 };
 
+// Chart Data
 const chartData = {
 	labels: [
 		"Jan",
@@ -40,21 +42,21 @@ const chartData = {
 	],
 	datasets: [
 		{
-			label: "Sales",
-			data: [10, 25, 18, 35, 20, 38, 23, 26, 15, 32, 20, 13],
+			label: "Active Users",
+			data: [120, 200, 150, 300, 250, 400, 350, 370, 330, 380, 390, 420],
 			tension: 0.4,
 			borderWidth: 0,
 		},
 		{
-			label: "Visits",
-			data: [15, 30, 22, 55, 14, 35, 20, 35, 20, 15, 18, 5],
+			label: "App Launches",
+			data: [80, 160, 140, 270, 230, 310, 280, 300, 260, 290, 310, 340],
 			tension: 0.4,
 			borderWidth: 0,
 		},
 	],
 };
 
-//Chart 2: Bar Chart
+// Chart 2: App Metrics Bar Chart
 export const Chart2 = () => {
 	const config = {
 		type: "bar",
@@ -64,7 +66,7 @@ export const Chart2 = () => {
 		},
 		options: {
 			borderRadius: 30,
-			categoryPercentage: 0.3,
+			categoryPercentage: 0.4,
 			maintainAspectRatio: false,
 			plugins: {
 				legend: {
@@ -72,15 +74,30 @@ export const Chart2 = () => {
 					position: "bottom",
 				},
 			},
+			scales: {
+				y: {
+					beginAtZero: true,
+					title: {
+						display: true,
+						text: "Count",
+					},
+				},
+				x: {
+					title: {
+						display: true,
+						text: "Month",
+					},
+				},
+			},
 		},
 		createGradients: (ctx) => {
 			const gradient1 = createGradient(ctx, [
-				[0, "#0d6efd"],
-				[1, "#0dcaf0"],
+				[0, "#198754"], // green
+				[1, "#20c997"],
 			]);
 			const gradient2 = createGradient(ctx, [
-				[0, "#dc3545"],
-				[1, "#f66d9b"],
+				[0, "#0d6efd"], // blue
+				[1, "#6f42c1"],
 			]);
 
 			config.data.datasets[0].backgroundColor = gradient1;
@@ -94,6 +111,7 @@ export const Chart2 = () => {
 	return <ChartComponent chartId="chart2" config={config} />;
 };
 
+// Helper: Gradient Generator
 const createGradient = (ctx, colors) => {
 	const gradient = ctx.createLinearGradient(0, 0, 0, 300);
 	colors.forEach(([stop, color]) => gradient.addColorStop(stop, color));

@@ -2,13 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
 
 const ChartComponent = ({ chartId, datasets, createGradients }) => {
+	// Create a ref for the canvas element.
 	const chartRef = useRef(null);
+	// Create a ref to store the Chart.js instance.
 	const chartInstance = useRef(null);
 
 	useEffect(() => {
+		// Get the canvas rendering context
 		const ctx = chartRef.current.getContext("2d");
 
-		// Create config inside the component
+		// Build the chart configuration. Here, we use fixed month labels.
+		// You can adjust these labels or make them props if needed.
 		const config = {
 			type: "bar",
 			data: {
@@ -26,7 +30,8 @@ const ChartComponent = ({ chartId, datasets, createGradients }) => {
 					"Nov",
 					"Dec",
 				],
-				datasets: JSON.parse(JSON.stringify(datasets)), // clone to avoid mutation
+				// Clone the datasets to prevent accidental mutation of props.
+				datasets: JSON.parse(JSON.stringify(datasets)),
 			},
 			options: {
 				borderRadius: 30,
@@ -41,12 +46,15 @@ const ChartComponent = ({ chartId, datasets, createGradients }) => {
 			},
 		};
 
+		// If a gradient creation function is provided, call it.
 		if (createGradients) {
 			createGradients(ctx, config);
 		}
 
+		// Create the Chart using the provided configuration.
 		chartInstance.current = new Chart(ctx, config);
 
+		// Cleanup function to destroy the chart instance when the component unmounts.
 		return () => chartInstance.current.destroy();
 	}, [datasets, createGradients]);
 

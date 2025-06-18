@@ -4,56 +4,77 @@ export default [
 		icon: "home",
 		children: [
 			{
-				title: "Analysis",
+				title: "Overview",
 				icon: "arrow_right",
-				link: "index.html",
+				link: "/dashboard/overview",
 			},
 			{
-				title: "eCommerce",
+				title: "Usage Analytics",
 				icon: "arrow_right",
-				link: "index2.html",
+				link: "/dashboard/analytics",
 			},
 		],
 	},
 	{
-		title: "Apps",
+		title: "Tracked Apps",
 		icon: "apps",
 		children: [
 			{
-				title: "Email",
+				title: "All Apps",
 				icon: "arrow_right",
-				link: "/apps/email",
+				link: "/apps/list",
 			},
 			{
-				title: "Calendar",
+				title: "Add New App",
 				icon: "arrow_right",
-				link: "/apps/calendar",
+				link: "/apps/create",
 			},
 			{
-				title: "Chat",
+				title: "Categories",
 				icon: "arrow_right",
-				link: "/apps/chat",
+				link: "/apps/categories",
 			},
 		],
 	},
 	{
-		title: "UI Elements",
-		icon: "widgets",
+		title: "User Activity",
+		icon: "group",
 		children: [
 			{
-				title: "Buttons",
+				title: "Active Users",
 				icon: "arrow_right",
-				link: "/ui/buttons",
+				link: "/users/active",
 			},
 			{
-				title: "Cards",
+				title: "App Sessions",
 				icon: "arrow_right",
-				link: "/ui/cards",
+				link: "/users/sessions",
 			},
 			{
-				title: "Modals",
+				title: "Feedback",
 				icon: "arrow_right",
-				link: "/ui/modals",
+				link: "/users/feedback",
+			},
+		],
+	},
+	{
+		title: "Developer Tools",
+		icon: "build",
+		children: [
+			{
+				title: "API Access",
+				icon: "arrow_right",
+				link: "/dev/api",
+			},
+			{
+				title: "Webhooks",
+				icon: "arrow_right",
+				link: "/dev/webhooks",
+			},
+			{
+				title: "Logs",
+				icon: "arrow_right",
+				link: "/dev/logs",
 			},
 		],
 	},
@@ -62,14 +83,19 @@ export default [
 		icon: "settings",
 		children: [
 			{
-				title: "Profile",
+				title: "Account",
 				icon: "arrow_right",
-				link: "/settings/profile",
+				link: "/settings/account",
 			},
 			{
-				title: "Security",
+				title: "Preferences",
 				icon: "arrow_right",
-				link: "/settings/security",
+				link: "/settings/preferences",
+			},
+			{
+				title: "Notifications",
+				icon: "arrow_right",
+				link: "/settings/notifications",
 			},
 		],
 	},
