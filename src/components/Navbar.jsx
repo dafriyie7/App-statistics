@@ -186,7 +186,7 @@ const Navbar = () => {
 													registered.
 												</p>
 												<p className="mb-0 notify-time">
-													Yesterday
+													Today
 												</p>
 											</div>
 											<div className="notify-close position-absolute end-0 me-3">
