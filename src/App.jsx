@@ -17,10 +17,9 @@ function App() {
 				<Route path="login" element={<LoginPage />} />
 				<Route path="register" element={<RegisterPage />} />
 
-
 				{/* Protected Routes (With Layout) */}
 				<Route path="/" element={<Layout />}>
-					<Route index element={<Dashboard1 />} />
+					<Route index element={<LoginPage />} />
 					<Route path="dashboard" element={<Dashboard1 />} />
 					<Route path="details" element={<Details />} />
 					<Route path="users" element={<Users />} />
