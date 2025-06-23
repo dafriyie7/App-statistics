@@ -1,3 +1,9 @@
+import twitter from '../assets/images/apps/twitter-circle.png';
+import facebook from "../assets/images/apps/17.png";
+import slack from "../assets/images/apps/03.png";
+import instagram from "../assets/images/apps/19.png"
+import snapchat from "../assets/images/apps/04.png";
+
 const TrackedAppStats = () => {
 	return (
 		<div className="col-12 col-lg-6 col-xxl-4 d-flex">
@@ -56,7 +62,7 @@ const TrackedAppStats = () => {
 						<div className="d-flex flex-column gap-4">
 							{[
 								{
-									img: "assets/images/apps/17.png",
+									img: facebook,
 									name: "Facebook",
 									category: "Engagement Tracker",
 									count: "45,689",
@@ -64,7 +70,7 @@ const TrackedAppStats = () => {
 									trend: "success",
 								},
 								{
-									img: "assets/images/apps/twitter-circle.png",
+									img: twitter,
 									name: "Twitter",
 									category: "Sentiment Monitor",
 									count: "34,248",
@@ -72,7 +78,7 @@ const TrackedAppStats = () => {
 									trend: "danger",
 								},
 								{
-									img: "assets/images/apps/03.png",
+									img: slack,
 									name: "TikTok",
 									category: "Audience Analytics",
 									count: "45,689",
@@ -80,7 +86,7 @@ const TrackedAppStats = () => {
 									trend: "success",
 								},
 								{
-									img: "assets/images/apps/19.png",
+									img: instagram,
 									name: "Instagram",
 									category: "Media Insights",
 									count: "67,249",
@@ -88,7 +94,7 @@ const TrackedAppStats = () => {
 									trend: "danger",
 								},
 								{
-									img: "assets/images/apps/20.png",
+									img: snapchat,
 									name: "Snapchat",
 									category: "User Behavior",
 									count: "89,178",

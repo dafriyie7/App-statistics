@@ -6,7 +6,7 @@ export default [
 			{
 				title: "Overview",
 				icon: "arrow_right",
-				link: "/dashboard/overview",
+				link: "/details",
 			},
 			{
 				title: "Usage Analytics",

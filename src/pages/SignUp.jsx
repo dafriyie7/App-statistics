@@ -39,7 +39,7 @@ const Register = () => {
 					<div className="card rounded-4 mb-0 border-top border-4 border-primary border-gradient-1">
 						<div className="card-body p-5">
 							<img
-								src="/assets/images/logo1.png"
+								src="../assets/images/logo1.png"
 								className="mb-4"
 								width="145"
 								alt="Logo"

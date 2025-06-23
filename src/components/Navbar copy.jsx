@@ -3,13 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
   /* <!--plugins--> */
   import "../assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css"
+  import "../assets/plugins/simplebar/css/simplebar.css"
   import "../assets/plugins/metismenu/metisMenu.min.css"
   import "../assets/plugins/metismenu/mm-vertical.css"
-  import "../assets/plugins/simplebar/css/simplebar.css"
 	/* <!--bootstrap css--> */
-//   import "../assets/css/bootstrap.min.css"
+//   import "../../assets/css/bootstrap.min.css"
 	/* <!--main css--> */
-  import "../assets/css/bootstrap-extended.css"
+  import "../../assets/css/bootstrap-extended.css"
   import "../sass/main.css"
   import "../sass/dark-theme.css"
   import "../sass/blue-theme.css"
@@ -141,7 +141,7 @@ const Navbar = () => {
 											<div className="d-flex align-items-center gap-3">
 												<div className="">
 													<img
-														src="../assets/images/avatars/01.png"
+														src="../../assets/images/avatars/01.png"
 														className="rounded-circle"
 														width="45"
 														height="45"
@@ -205,7 +205,7 @@ const Navbar = () => {
 											<div className="d-flex align-items-center gap-3">
 												<div className="">
 													<img
-														src="../assets/images/apps/13.png"
+														src="../../assets/images/apps/13.png"
 														className="rounded-circle"
 														width="45"
 														height="45"
@@ -240,7 +240,7 @@ const Navbar = () => {
 											<div className="d-flex align-items-center gap-3">
 												<div className="">
 													<img
-														src="../assets/images/apps/14.png"
+														src="../../assets/images/apps/14.png"
 														className="rounded-circle"
 														width="45"
 														height="45"
@@ -275,7 +275,7 @@ const Navbar = () => {
 											<div className="d-flex align-items-center gap-3">
 												<div className="">
 													<img
-														src="../assets/images/avatars/06.png"
+														src="../../assets/images/avatars/06.png"
 														className="rounded-circle"
 														width="45"
 														height="45"
@@ -355,7 +355,7 @@ const Navbar = () => {
 								data-bs-toggle="dropdown"
 							>
 								<img
-									src="../assets/images/avatars/01.png"
+									src="../../assets/images/avatars/01.png"
 									className="rounded-circle p-1 border"
 									width="45"
 									height="45"
@@ -371,7 +371,7 @@ const Navbar = () => {
 								>
 									<div className="text-center">
 										<img
-											src="../assets/images/avatars/01.png"
+											src="../../assets/images/avatars/01.png"
 											className="rounded-circle p-1 shadow mb-3"
 											width="90"
 											height="90"

@@ -1,4 +1,5 @@
-import { Chart9 } from "./charts/Chart9";
+
+import BarChart from "./Chartjs/BarChart";
 
 const SmallSquares = (props) => {
 	return (
@@ -24,7 +25,7 @@ const SmallSquares = (props) => {
 						<h4 className="mb-0">248k</h4>
 						<p className="mb-3">New Installs</p>
 						<div style={{ height: "170px" }}>
-							{props.chart ? props.chart : <Chart9 />}
+							{props.chart ? props.chart : <BarChart />}
 						</div>
 					</div>
 				</div>

@@ -1,6 +1,7 @@
-import React from "react";
+import o07 from "../assets/images/apps/07.png"
 
 const BigRect = () => {
+
 	return (
 		<div className="col-12 col-xxl-6 d-flex">
 			<div className="card rounded-4 w-100">
@@ -55,7 +56,7 @@ const BigRect = () => {
 										date: "16 Jun, 2025",
 										time: "2:15 PM",
 										name: "Spotify",
-										icon: "assets/images/apps/07.png",
+										icon: o07.png,
 										activity: "Crash Report",
 										status: "Failed",
 									},
@@ -63,7 +64,7 @@ const BigRect = () => {
 										date: "15 Jun, 2025",
 										time: "10:05 AM",
 										name: "Behance",
-										icon: "assets/images/apps/behance.png",
+										icon: "../assets/images/apps/behance.png",
 										activity: "Analytics Synced",
 										status: "Success",
 									},
@@ -71,7 +72,7 @@ const BigRect = () => {
 										date: "15 Jun, 2025",
 										time: "9:45 AM",
 										name: "Google Drive",
-										icon: "assets/images/apps/05.png",
+										icon: "../assets/images/apps/05.png",
 										activity: "Deployment",
 										status: "Pending",
 									},
@@ -79,7 +80,7 @@ const BigRect = () => {
 										date: "14 Jun, 2025",
 										time: "6:30 PM",
 										name: "Apple Music",
-										icon: "assets/images/apps/apple.png",
+										icon: "../assets/images/apps/apple.png",
 										activity: "Version Update",
 										status: "Success",
 									},
@@ -87,7 +88,7 @@ const BigRect = () => {
 										date: "14 Jun, 2025",
 										time: "1:10 PM",
 										name: "Paystack",
-										icon: "assets/images/apps/paypal.png",
+										icon: "../assets/images/apps/paypal.png",
 										activity: "Webhook Setup",
 										status: "Success",
 									},

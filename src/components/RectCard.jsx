@@ -10,7 +10,7 @@ const RectCard = () => {
 								<span className="fw-600">Daniel</span>!
 							</h5>
 							<img
-								src="assets/images/apps/party-popper.png"
+								src="../assets/images/apps/party-popper.png"
 								width="24"
 								height="24"
 								alt="Milestone"
@@ -30,7 +30,7 @@ const RectCard = () => {
 								</button>
 							</div>
 							<img
-								src="assets/images/apps/gift-box-3.png"
+								src="../assets/images/apps/gift-box-3.png"
 								width="100"
 								alt="Achievement"
 							/>
