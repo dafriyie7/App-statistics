@@ -11,7 +11,7 @@ export default [
 			{
 				title: "User",
 				icon: "arrow_right",
-				link: "/details",
+				link: "/user",
 			},
 		],
 	},
@@ -22,7 +22,7 @@ export default [
 			{
 				title: "Login",
 				icon: "arrow_right",
-				link: "/",
+				link: "/signin",
 			},
 			{
 				title: "Sign Up",

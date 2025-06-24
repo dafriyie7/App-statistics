@@ -14,6 +14,8 @@ import "../sass/semi-dark.css";
 import "../sass/bordered-theme.css";
 import "../sass/responsive.css";
 
+import user from "../assets/images/avatars/01.png";
+
 const Navbar = () => {
 	return (
 		<header className="top-header shadow-sm bg-white">
@@ -59,7 +61,7 @@ const Navbar = () => {
 							aria-expanded="false"
 						>
 							<img
-								src="../assets/images/avatars/01.png"
+								src={user}
 								alt="User Avatar"
 								width="40"
 								height="40"

@@ -31,6 +31,8 @@ import SmallSquares from "../components/SmallSquares";
 import DRectCard from "../components/DRectCard";
 import BigRect from "../components/BigRect";
 
+import LineChart from "../components/Chartjs/LineChart"
+
 const Dashboard1j = () => {
 	return (
 		<>
@@ -40,9 +42,9 @@ const Dashboard1j = () => {
 					<Breadcrumb />
 					<div className="row">
 						<RectCard />
+						<SmallSquares chart={<LineChart />} />
 						<SmallSquares />
-						<SmallSquares />
-						<SmallSquares />
+						<SmallSquares chart={< LineChart />} />
 						<SmallSquares />
 					</div>
 					<div className="row">

@@ -1,3 +1,6 @@
+import hurray from "../assets/images/apps/party-popper.png";
+import achievement from "../assets/images/apps/gift-box-3.png"
+
 const RectCard = () => {
 	return (
 		<div className="col-12 col-lg-4 col-xxl-4 d-flex">
@@ -10,7 +13,7 @@ const RectCard = () => {
 								<span className="fw-600">Daniel</span>!
 							</h5>
 							<img
-								src="../assets/images/apps/party-popper.png"
+								src= {hurray}
 								width="24"
 								height="24"
 								alt="Milestone"
@@ -30,7 +33,7 @@ const RectCard = () => {
 								</button>
 							</div>
 							<img
-								src="../assets/images/apps/gift-box-3.png"
+								src= {achievement}
 								width="100"
 								alt="Achievement"
 							/>
