@@ -9,93 +9,25 @@ export default [
 				link: "/details",
 			},
 			{
-				title: "Usage Analytics",
+				title: "User",
 				icon: "arrow_right",
-				link: "/dashboard/analytics",
+				link: "/details",
 			},
 		],
 	},
 	{
-		title: "Tracked Apps",
+		title: "Authentication",
 		icon: "apps",
 		children: [
 			{
-				title: "All Apps",
+				title: "Login",
 				icon: "arrow_right",
-				link: "/apps/list",
+				link: "/",
 			},
 			{
-				title: "Add New App",
+				title: "Sign Up",
 				icon: "arrow_right",
-				link: "/apps/create",
-			},
-			{
-				title: "Categories",
-				icon: "arrow_right",
-				link: "/apps/categories",
-			},
-		],
-	},
-	{
-		title: "User Activity",
-		icon: "group",
-		children: [
-			{
-				title: "Active Users",
-				icon: "arrow_right",
-				link: "/users/active",
-			},
-			{
-				title: "App Sessions",
-				icon: "arrow_right",
-				link: "/users/sessions",
-			},
-			{
-				title: "Feedback",
-				icon: "arrow_right",
-				link: "/users/feedback",
-			},
-		],
-	},
-	{
-		title: "Developer Tools",
-		icon: "build",
-		children: [
-			{
-				title: "API Access",
-				icon: "arrow_right",
-				link: "/dev/api",
-			},
-			{
-				title: "Webhooks",
-				icon: "arrow_right",
-				link: "/dev/webhooks",
-			},
-			{
-				title: "Logs",
-				icon: "arrow_right",
-				link: "/dev/logs",
-			},
-		],
-	},
-	{
-		title: "Settings",
-		icon: "settings",
-		children: [
-			{
-				title: "Account",
-				icon: "arrow_right",
-				link: "/settings/account",
-			},
-			{
-				title: "Preferences",
-				icon: "arrow_right",
-				link: "/settings/preferences",
-			},
-			{
-				title: "Notifications",
-				icon: "arrow_right",
-				link: "/settings/notifications",
+				link: "/register",
 			},
 		],
 	},

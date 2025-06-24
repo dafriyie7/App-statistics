@@ -12,11 +12,11 @@ function App() {
 			<Routes>
 				{/* Public Routes (No Layout) */}
 				<Route path="/signin" element={<SignIn />} />
-				<Route path="/signup" element={<SignUp />} />
+				<Route path="/register" element={<SignUp />} />
 
 				{/* Protected Routes (With Layout) */}
 				<Route path="/" element={<Layout />}>
-					<Route index element={<SignIn />} />
+					<Route index element={<Dashboard1 />} />
 					<Route path="dashboard" element={<Dashboard1 />} />
 					<Route path="details" element={<Details />} />
 					<Route path="user" element={<UserAnalyticsCard />} />

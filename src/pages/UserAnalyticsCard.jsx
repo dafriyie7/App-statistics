@@ -1,4 +1,11 @@
 import { Link } from "react-router-dom";
+import skype from "../assets/images/apps/02.png";
+import slack from "../assets/images/apps/03.png";
+import instagram from "../assets/images/apps/19.png";
+import facebook from "../assets/images/apps/17.png";
+import paypal from "../assets/images/apps/11.png";
+import google from "../assets/images/apps/05.png";
+import avatar from "../assets/images/avatars/01.png";
 
 const UserAnalyticsCard = () => {
 	
@@ -71,7 +78,7 @@ const UserAnalyticsCard = () => {
 							/>
 							<div className="profile-avatar position-absolute top-100 start-50 translate-middle">
 								<img
-									src="../assets/images/avatars/01.png"
+									src={avatar}
 									className="img-fluid rounded-circle p-1 bg-grd-danger shadow"
 									width="170"
 									height="170"
@@ -460,7 +467,7 @@ const UserAnalyticsCard = () => {
 								<div className="account-list d-flex flex-column gap-4">
 									<div className="account-list-item d-flex align-items-center gap-3">
 										<img
-											src="../assets/images/apps/05.png"
+											src={google}
 											width="35"
 											alt=""
 										/>
@@ -480,7 +487,7 @@ const UserAnalyticsCard = () => {
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
 										<img
-											src="../assets/images/apps/02.png"
+											src={skype}
 											width="35"
 											alt=""
 										/>
@@ -500,7 +507,7 @@ const UserAnalyticsCard = () => {
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
 										<img
-											src="../assets/images/apps/03.png"
+											src={slack}
 											width="35"
 											alt=""
 										/>
@@ -518,7 +525,7 @@ const UserAnalyticsCard = () => {
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
 										<img
-											src="../assets/images/apps/06.png"
+											src={instagram}
 											width="35"
 											alt=""
 										/>
@@ -536,7 +543,7 @@ const UserAnalyticsCard = () => {
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
 										<img
-											src="../assets/images/apps/17.png"
+											src={facebook}
 											width="35"
 											alt=""
 										/>
@@ -554,7 +561,7 @@ const UserAnalyticsCard = () => {
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
 										<img
-											src="../assets/images/apps/11.png"
+											src={paypal}
 											width="35"
 											alt=""
 										/>

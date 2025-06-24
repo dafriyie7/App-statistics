@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import ThemeBtn from "../components/ThemeBtn";
+import logo from "../assets/images/logo1.png";
 
 const Register = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +40,7 @@ const Register = () => {
 					<div className="card rounded-4 mb-0 border-top border-4 border-primary border-gradient-1">
 						<div className="card-body p-5">
 							<img
-								src="../assets/images/logo1.png"
+								src= {logo}
 								className="mb-4"
 								width="145"
 								alt="Logo"
@@ -192,7 +193,7 @@ const Register = () => {
 										<div className="text-start">
 											<p className="mb-0">
 												Already have an account?{" "}
-												<a href="/auth-basic-login">
+												<a href="/signin">
 													Sign in here
 												</a>
 											</p>

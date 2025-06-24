@@ -1,20 +1,55 @@
-
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ThemeBtn from "../components/ThemeBtn";
+import logo from "../assets/images/logo1.png";
+
+/** 🔑 TEMP – replace with fetch("/api/auth/login", …) later */
+const users = [
+	{ email: "daniel@gmail.com", password: "daniel", name: "Daniel" },
+	{ email: "admin@example.com", password: "admin123", name: "Admin" },
+];
 
 const LoginPage = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("12345678");
-	const [showPassword, setShowPassword] = useState(false);
-	const [rememberMe, setRememberMe] = useState(false);
 	const navigate = useNavigate();
 
-	const handleLogin = (e) => {
+	// form state
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
+
+	// ui state
+	const [showPassword, setShowPassword] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+
+	/** ───────── Handle Submit ───────── */
+	const handleLogin = async (e) => {
 		e.preventDefault();
-		// Replace with your login logic
-		console.log("Logging in with:", { email, password, rememberMe });
+		setError("");
+		setLoading(true);
+
+		// mock auth
+		const user = users.find(
+			(u) => u.email === email.trim() && u.password === password
+		);
+
+		// simulate latency
+		await new Promise((res) => setTimeout(res, 500));
+
+		if (!user) {
+			setError("Invalid email or password.");
+			setLoading(false);
+			return;
+		}
+
+		// persist “session” if Remember-me
+		if (rememberMe) {
+			localStorage.setItem("appTrackerUser", JSON.stringify(user));
+		} else {
+			sessionStorage.setItem("appTrackerUser", JSON.stringify(user));
+		}
+
+		// optional toast / snackbar → “Welcome back, …”
 		navigate("/dashboard");
 	};
 
@@ -26,31 +61,38 @@ const LoginPage = () => {
 						<div className="card rounded-4 mb-0 border-top border-4 border-primary border-gradient-1">
 							<div className="card-body p-5">
 								<img
-									src="../assets/images/logo1.png"
+									src={logo}
 									className="mb-4"
 									width="145"
 									alt="logo"
 								/>
 								<h4 className="fw-bold">Get Started Now</h4>
 								<p className="mb-0">
-									Enter your credentials to login your account
+									Enter your credentials to log in
 								</p>
 
+								{/* error banner */}
+								{error && (
+									<div className="alert alert-danger mt-4 py-2">
+										{error}
+									</div>
+								)}
+
 								<form
-									className="row g-3 my-5"
+									className="row g-3 my-4"
 									onSubmit={handleLogin}
 								>
 									<div className="col-12">
 										<label
-											htmlFor="inputEmailAddress"
+											htmlFor="email"
 											className="form-label"
 										>
 											Email
 										</label>
 										<input
+											id="email"
 											type="email"
 											className="form-control"
-											id="inputEmailAddress"
 											placeholder="jhon@example.com"
 											value={email}
 											onChange={(e) =>
@@ -59,27 +101,28 @@ const LoginPage = () => {
 											required
 										/>
 									</div>
+
 									<div className="col-12">
 										<label
-											htmlFor="inputChoosePassword"
+											htmlFor="password"
 											className="form-label"
 										>
 											Password
 										</label>
 										<div className="input-group">
 											<input
+												id="password"
 												type={
 													showPassword
 														? "text"
 														: "password"
 												}
 												className="form-control border-end-0"
-												id="inputChoosePassword"
+												placeholder="••••••••"
 												value={password}
 												onChange={(e) =>
 													setPassword(e.target.value)
 												}
-												placeholder="Enter Password"
 												required
 											/>
 											<button
@@ -97,16 +140,17 @@ const LoginPage = () => {
 															? "bi-eye-fill"
 															: "bi-eye-slash-fill"
 													}`}
-												></i>
+												/>
 											</button>
 										</div>
 									</div>
+
 									<div className="col-md-6">
 										<div className="form-check form-switch">
 											<input
+												id="remember"
 												className="form-check-input"
 												type="checkbox"
-												id="flexSwitchCheckChecked"
 												checked={rememberMe}
 												onChange={(e) =>
 													setRememberMe(
@@ -116,68 +160,75 @@ const LoginPage = () => {
 											/>
 											<label
 												className="form-check-label"
-												htmlFor="flexSwitchCheckChecked"
+												htmlFor="remember"
 											>
 												Remember Me
 											</label>
 										</div>
 									</div>
+
 									<div className="col-md-6 text-end">
 										<a href="/forgot-password">
-											Forgot Password ?
+											Forgot Password?
 										</a>
 									</div>
+
 									<div className="col-12">
 										<div className="d-grid">
 											<button
 												type="submit"
 												className="btn btn-grd-primary"
+												disabled={loading}
 											>
-												Login
+												{loading
+													? "Signing in…"
+													: "Login"}
 											</button>
 										</div>
 									</div>
+
 									<div className="col-12 text-start">
 										<p className="mb-0">
-											Don't have an account yet?{" "}
+											Don’t have an account?{" "}
 											<a href="/register">Sign up here</a>
 										</p>
 									</div>
 								</form>
 
-								<div className="separator section-padding d-flex align-items-center">
-									<div className="line flex-grow-1"></div>
-									<p className="mb-0 fw-bold px-2">
+								{/* social buttons (unchanged) */}
+								<div className="separator section-padding d-flex align-items-center gap-2">
+									<div className="line flex-grow-1" />
+									<p className="mb-0 fw-bold px-2 small">
 										OR SIGN IN WITH
 									</p>
-									<div className="line flex-grow-1"></div>
+									<div className="line flex-grow-1" />
 								</div>
 
 								<div className="d-flex gap-3 justify-content-center mt-4">
-									<a
-										href="#"
-										className="wh-42 d-flex align-items-center justify-content-center rounded-circle bg-grd-danger"
-									>
-										<i className="bi bi-google fs-5 text-white"></i>
-									</a>
-									<a
-										href="#"
-										className="wh-42 d-flex align-items-center justify-content-center rounded-circle bg-grd-deep-blue"
-									>
-										<i className="bi bi-facebook fs-5 text-white"></i>
-									</a>
-									<a
-										href="#"
-										className="wh-42 d-flex align-items-center justify-content-center rounded-circle bg-grd-info"
-									>
-										<i className="bi bi-linkedin fs-5 text-white"></i>
-									</a>
-									<a
-										href="#"
-										className="wh-42 d-flex align-items-center justify-content-center rounded-circle bg-grd-royal"
-									>
-										<i className="bi bi-github fs-5 text-white"></i>
-									</a>
+									{[
+										"google",
+										"facebook",
+										"linkedin",
+										"github",
+									].map((p) => (
+										<a
+											key={p}
+											href="#"
+											className={`wh-42 d-flex align-items-center justify-content-center rounded-circle bg-grd-${
+												p === "google"
+													? "danger"
+													: p === "facebook"
+													? "deep-blue"
+													: p === "linkedin"
+													? "info"
+													: "royal"
+											}`}
+										>
+											<i
+												className={`bi bi-${p} fs-5 text-white`}
+											/>
+										</a>
+									))}
 								</div>
 							</div>
 						</div>
