@@ -22,7 +22,7 @@ export default [
 			{
 				title: "Login",
 				icon: "arrow_right",
-				link: "/signin",
+				link: "dashboard/signin",
 			},
 			{
 				title: "Sign Up",
