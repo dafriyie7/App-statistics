@@ -6,12 +6,12 @@ export default [
 			{
 				title: "Overview",
 				icon: "arrow_right",
-				link: "/details",
+				link: "details",
 			},
 			{
 				title: "User",
 				icon: "arrow_right",
-				link: "/user",
+				link: "user",
 			},
 		],
 	},
@@ -22,12 +22,12 @@ export default [
 			{
 				title: "Login",
 				icon: "arrow_right",
-				link: "dashboard/signin",
+				link: "signin",
 			},
 			{
 				title: "Sign Up",
 				icon: "arrow_right",
-				link: "/register",
+				link: "register",
 			},
 		],
 	},
