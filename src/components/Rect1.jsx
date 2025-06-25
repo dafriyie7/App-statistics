@@ -1,48 +1,45 @@
-import hurray from "../assets/images/apps/party-popper.png";
-import achievement from "../assets/images/apps/gift-box-3.png"
+import React from 'react'
 
-const RectCard = () => {
-	return (
+const Rect1 = () => {
+  return (
 		<div className="col-12 col-lg-4 col-xxl-4 d-flex">
 			<div className="card rounded-4 w-100">
 				<div className="card-body">
-					<div>
+					<div className="">
 						<div className="d-flex align-items-center gap-2 mb-2">
 							<h5 className="mb-0">
-								Well done,{" "}
-								<span className="fw-600">Daniel</span>!
+								Congratulations{" "}
+								<span className="fw-600">Jhon</span>
 							</h5>
 							<img
-								src= {hurray}
+								src="assets/images/apps/party-popper.png"
 								width="24"
 								height="24"
-								alt="Milestone"
+								alt=""
 							/>
 						</div>
 						<p className="mb-4">
-							You completed all your app goals this month.
+							You are the best seller of this monnth
 						</p>
 						<div className="d-flex align-items-center justify-content-between">
-							<div>
-								<h3 className="mb-0 text-indigo">
-									92% Completed
-								</h3>
-								<p className="mb-3">Milestone Reached</p>
+							<div className="">
+								<h3 className="mb-0 text-indigo">$168.5K</h3>
+								<p className="mb-3">58% of sales target</p>
 								<button className="btn btn-grd btn-grd-primary rounded-5 border-0 px-4">
-									Track Progress
+									View Details
 								</button>
 							</div>
 							<img
-								src= {achievement}
+								src="assets/images/apps/gift-box-3.png"
 								width="100"
-								alt="Achievement"
+								alt=""
 							/>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	);
-};
+  );
+}
 
-export default RectCard;
+export default Rect1

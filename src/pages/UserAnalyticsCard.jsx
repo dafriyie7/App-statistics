@@ -8,7 +8,6 @@ import google from "../assets/images/apps/05.png";
 import avatar from "../assets/images/avatars/01.png";
 
 const UserAnalyticsCard = () => {
-	
 	return (
 		<main className="main-wrapper">
 			<div className="main-content">
@@ -100,7 +99,8 @@ const UserAnalyticsCard = () => {
 									to="#"
 									className="btn btn-grd-primary rounded-5 px-4"
 								>
-									<i className="bi bi-chat me-2"></i>Send Message
+									<i className="bi bi-chat me-2"></i>Send
+									Message
 								</Link>
 							</div>
 						</div>
@@ -177,7 +177,10 @@ const UserAnalyticsCard = () => {
 								</div>
 								<form className="row g-4">
 									<div className="col-md-6">
-										<label htmlFor="input1" className="form-label">
+										<label
+											htmlFor="input1"
+											className="form-label"
+										>
 											First Name
 										</label>
 										<input
@@ -188,7 +191,10 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-6">
-										<label htmlFor="input2" className="form-label">
+										<label
+											htmlFor="input2"
+											className="form-label"
+										>
 											Last Name
 										</label>
 										<input
@@ -199,7 +205,10 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-12">
-										<label htmlFor="input3" className="form-label">
+										<label
+											htmlFor="input3"
+											className="form-label"
+										>
 											Phone
 										</label>
 										<input
@@ -210,7 +219,10 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-12">
-										<label htmlFor="input4" className="form-label">
+										<label
+											htmlFor="input4"
+											className="form-label"
+										>
 											Email
 										</label>
 										<input
@@ -220,7 +232,10 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-12">
-										<label htmlFor="input5" className="form-label">
+										<label
+											htmlFor="input5"
+											className="form-label"
+										>
 											Password
 										</label>
 										<input
@@ -230,7 +245,10 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-12">
-										<label htmlFor="input6" className="form-label">
+										<label
+											htmlFor="input6"
+											className="form-label"
+										>
 											DOB
 										</label>
 										<input
@@ -240,10 +258,16 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-12">
-										<label htmlFor="input7" className="form-label">
+										<label
+											htmlFor="input7"
+											className="form-label"
+										>
 											Country
 										</label>
-										<select id="input7" className="form-select">
+										<select
+											id="input7"
+											className="form-select"
+										>
 											<option selected="">
 												Choose...
 											</option>
@@ -254,7 +278,10 @@ const UserAnalyticsCard = () => {
 									</div>
 
 									<div className="col-md-6">
-										<label htmlFor="input8" className="form-label">
+										<label
+											htmlFor="input8"
+											className="form-label"
+										>
 											City
 										</label>
 										<input
@@ -265,10 +292,16 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-4">
-										<label htmlFor="input9" className="form-label">
+										<label
+											htmlFor="input9"
+											className="form-label"
+										>
 											State
 										</label>
-										<select id="input9" className="form-select">
+										<select
+											id="input9"
+											className="form-select"
+										>
 											<option selected="">
 												Choose...
 											</option>
@@ -278,7 +311,10 @@ const UserAnalyticsCard = () => {
 										</select>
 									</div>
 									<div className="col-md-2">
-										<label htmlFor="input10" className="form-label">
+										<label
+											htmlFor="input10"
+											className="form-label"
+										>
 											Zip
 										</label>
 										<input
@@ -289,7 +325,10 @@ const UserAnalyticsCard = () => {
 										/>
 									</div>
 									<div className="col-md-12">
-										<label htmlFor="input11" className="form-label">
+										<label
+											htmlFor="input11"
+											className="form-label"
+										>
 											Address
 										</label>
 										<textarea
@@ -379,13 +418,17 @@ const UserAnalyticsCard = () => {
 											<span className="material-icons-outlined">
 												done
 											</span>
-											<p className="mb-0">Status: active</p>
+											<p className="mb-0">
+												Status: active
+											</p>
 										</div>
 										<div className="info-list-item d-flex align-items-center gap-3">
 											<span className="material-icons-outlined">
 												code
 											</span>
-											<p className="mb-0">Role: Developer</p>
+											<p className="mb-0">
+												Role: Developer
+											</p>
 										</div>
 										<div className="info-list-item d-flex align-items-center gap-3">
 											<span className="material-icons-outlined">
@@ -405,7 +448,9 @@ const UserAnalyticsCard = () => {
 											<span className="material-icons-outlined">
 												send
 											</span>
-											<p className="mb-0">Email: jhon.xyz</p>
+											<p className="mb-0">
+												Email: jhon.xyz
+											</p>
 										</div>
 										<div className="info-list-item d-flex align-items-center gap-3">
 											<span className="material-icons-outlined">
@@ -423,7 +468,9 @@ const UserAnalyticsCard = () => {
 							<div className="card-body">
 								<div className="d-flex align-items-start justify-content-between mb-3">
 									<div className="">
-										<h5 className="mb-0 fw-bold">Accounts</h5>
+										<h5 className="mb-0 fw-bold">
+											Accounts
+										</h5>
 									</div>
 									<div className="dropdown">
 										<Link
@@ -466,11 +513,7 @@ const UserAnalyticsCard = () => {
 
 								<div className="account-list d-flex flex-column gap-4">
 									<div className="account-list-item d-flex align-items-center gap-3">
-										<img
-											src={google}
-											width="35"
-											alt=""
-										/>
+										<img src={google} width="35" alt="" />
 										<div className="flex-grow-1">
 											<h6 className="mb-0">Google</h6>
 											<p className="mb-0">
@@ -486,11 +529,7 @@ const UserAnalyticsCard = () => {
 										</div>
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
-										<img
-											src={skype}
-											width="35"
-											alt=""
-										/>
+										<img src={skype} width="35" alt="" />
 										<div className="flex-grow-1">
 											<h6 className="mb-0">Skype</h6>
 											<p className="mb-0">
@@ -506,14 +545,12 @@ const UserAnalyticsCard = () => {
 										</div>
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
-										<img
-											src={slack}
-											width="35"
-											alt=""
-										/>
+										<img src={slack} width="35" alt="" />
 										<div className="flex-grow-1">
 											<h6 className="mb-0">Slack</h6>
-											<p className="mb-0">Communication</p>
+											<p className="mb-0">
+												Communication
+											</p>
 										</div>
 										<div className="form-check form-switch">
 											<input
@@ -531,7 +568,9 @@ const UserAnalyticsCard = () => {
 										/>
 										<div className="flex-grow-1">
 											<h6 className="mb-0">Instagram</h6>
-											<p className="mb-0">Social Network</p>
+											<p className="mb-0">
+												Social Network
+											</p>
 										</div>
 										<div className="form-check form-switch">
 											<input
@@ -542,14 +581,12 @@ const UserAnalyticsCard = () => {
 										</div>
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
-										<img
-											src={facebook}
-											width="35"
-											alt=""
-										/>
+										<img src={facebook} width="35" alt="" />
 										<div className="flex-grow-1">
 											<h6 className="mb-0">Facebook</h6>
-											<p className="mb-0">Social Network</p>
+											<p className="mb-0">
+												Social Network
+											</p>
 										</div>
 										<div className="form-check form-switch">
 											<input
@@ -560,14 +597,12 @@ const UserAnalyticsCard = () => {
 										</div>
 									</div>
 									<div className="account-list-item d-flex align-items-center gap-3">
-										<img
-											src={paypal}
-											width="35"
-											alt=""
-										/>
+										<img src={paypal} width="35" alt="" />
 										<div className="flex-grow-1">
 											<h6 className="mb-0">Paypal</h6>
-											<p className="mb-0">Social Network</p>
+											<p className="mb-0">
+												Social Network
+											</p>
 										</div>
 										<div className="form-check form-switch">
 											<input

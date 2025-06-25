@@ -1,10 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Dashboard1 from "./pages/Dashboard1";
+import Dashboard1 from "./pages/Dashboard";
 import Details from "./pages/Details";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import UserAnalyticsCard from "./pages/UserAnalyticsCard";
+import BeneficiariesManagement from "./pages/BeneficiariesManagement";
+import DeviceManagement from "./pages/DeviceManagement";
+import EditBeneficiary from "./pages/EditBeneficiary";
+import EditDevice from "./pages/EditDevice";
 
 function App() {
 	return (
@@ -20,7 +24,17 @@ function App() {
 					<Route path="dashboard" element={<Dashboard1 />} />
 					<Route path="details" element={<Details />} />
 					<Route path="user" element={<UserAnalyticsCard />} />
-					<Route path="dashboard/analytics" element={<Details />} />
+					<Route path="analytics" element={<Details />} />
+					<Route path="users" element={<BeneficiariesManagement />} />
+					<Route
+						path="device-management"
+						element={<DeviceManagement />}
+					/>
+					<Route
+						path="/beneficiaries/:id/edit"
+						element={<EditBeneficiary />}
+					/>
+					<Route path="devices/:id/edit" element={<EditDevice />} />
 				</Route>
 			</Routes>
 		</Router>

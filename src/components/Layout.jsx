@@ -12,8 +12,12 @@ const Layout = () => {
 			<div className="flex flex-1 overflow-hidden">
 				<Sidebar />
 
-				<main className="flex-1 overflow-auto p-4">
-					<Outlet />
+				<main className="main-wrapper">
+					<div className="main-content">
+							<Outlet />
+						<div className="row">
+						</div>
+					</div>
 				</main>
 			</div>
 

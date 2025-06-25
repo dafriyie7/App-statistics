@@ -20,7 +20,7 @@ import "../sass/responsive.css";
 const Footer = () => {
 	return (
 		<footer className="page-footer">
-			<p className="mb-0">Copyright © 2024. All right reserved.</p>
+			<p className="mb-0">Copyright © 2025. All right reserved.</p>
 		</footer>
 	);
 };

@@ -6,13 +6,23 @@ export default [
 			{
 				title: "Overview",
 				icon: "arrow_right",
-				link: "details",
+				link: "dashboard",
 			},
 			{
 				title: "User",
 				icon: "arrow_right",
 				link: "user",
 			},
+			{
+				title: "Users",
+				icon: "arrow_right",
+				link: "users"
+			},
+			{
+				title: "Device management",
+				icon: "arrow_right",
+				link: "device-management"
+		}
 		],
 	},
 	{
