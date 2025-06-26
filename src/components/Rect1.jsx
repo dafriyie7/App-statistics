@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Rect1 = () => {
+const Rect1 = (props) => {
   return (
 		<div className="col-12 col-lg-4 col-xxl-4 d-flex">
 			<div className="card rounded-4 w-100">
@@ -8,8 +8,8 @@ const Rect1 = () => {
 					<div className="">
 						<div className="d-flex align-items-center gap-2 mb-2">
 							<h5 className="mb-0">
-								Congratulations{" "}
-								<span className="fw-600">Jhon</span>
+								{props.title}{" "}
+								<span className="fw-600">{props.name}</span>
 							</h5>
 							<img
 								src="assets/images/apps/party-popper.png"
@@ -19,14 +19,14 @@ const Rect1 = () => {
 							/>
 						</div>
 						<p className="mb-4">
-							You are the best seller of this monnth
+							{props.text}
 						</p>
 						<div className="d-flex align-items-center justify-content-between">
 							<div className="">
-								<h3 className="mb-0 text-indigo">$168.5K</h3>
-								<p className="mb-3">58% of sales target</p>
+							  <h3 className="mb-0 text-indigo">{props.figure}</h3>
+								<p className="mb-3">{props.round}</p>
 								<button className="btn btn-grd btn-grd-primary rounded-5 border-0 px-4">
-									View Details
+									{props.button}
 								</button>
 							</div>
 							<img

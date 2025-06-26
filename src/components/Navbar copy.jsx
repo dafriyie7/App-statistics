@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
   import "../sass/semi-dark.css"
   import "../sass/bordered-theme.css"
   import "../sass/responsive.css"
+import Dropdown from "./Dropdown";
 
 const Navbar = () => {
 	return (
@@ -58,79 +59,8 @@ const Navbar = () => {
 								<div className="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
 									<h5 className="notiy-title mb-0">
 										Notifications
-									</h5>
-									<div className="dropdown">
-										<button
-											className="btn btn-secondary dropdown-toggle dropdown-toggle-nocaret option"
-											type="button"
-											data-bs-toggle="dropdown"
-											aria-expanded="false"
-										>
-											<span className="material-icons-outlined">
-												more_vert
-											</span>
-										</button>
-										<div className="dropdown-menu dropdown-option dropdown-menu-end shadow">
-											<div>
-												<a
-													className="dropdown-item d-flex align-items-center gap-2 py-2"
-													href="javascript:;"
-												>
-													<i className="material-icons-outlined fs-6">
-														inventory_2
-													</i>
-													Archive All
-												</a>
-											</div>
-											<div>
-												<a
-													className="dropdown-item d-flex align-items-center gap-2 py-2"
-													href="javascript:;"
-												>
-													<i className="material-icons-outlined fs-6">
-														done_all
-													</i>
-													Mark all as read
-												</a>
-											</div>
-											<div>
-												<a
-													className="dropdown-item d-flex align-items-center gap-2 py-2"
-													href="javascript:;"
-												>
-													<i className="material-icons-outlined fs-6">
-														mic_off
-													</i>
-													Disable Notifications
-												</a>
-											</div>
-											<div>
-												<a
-													className="dropdown-item d-flex align-items-center gap-2 py-2"
-													href="javascript:;"
-												>
-													<i className="material-icons-outlined fs-6">
-														grade
-													</i>
-													What's new ?
-												</a>
-											</div>
-											<div>
-												<hr className="dropdown-divider" />
-											</div>
-											<div>
-												<a
-													className="dropdown-item d-flex align-items-center gap-2 py-2"
-													href="javascript:;"
-												>
-													<i className="material-icons-outlined fs-6">
-														leaderboard
-													</i>
-													Reports
-												</a>
-											</div>
-										</div>
-									</div>
+								</h5>
+								<Dropdown />
 								</div>
 								<div className="notify-list">
 									<div>
