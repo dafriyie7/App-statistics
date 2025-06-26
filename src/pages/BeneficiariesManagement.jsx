@@ -380,10 +380,11 @@
 
 // export default DeviceManagement;
 
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ManagementTable } from "../components/Table"; // adjust path as needed
-import userData from "../components/usersData";
+import users from "../components/usersData"
 
 /*********************************************************************
  * BeneficiariesManagement                                           *
@@ -406,7 +407,7 @@ const BeneficiariesManagement = () => {
 	const navigate = useNavigate();
 
 	/* --------------------------------------------------------------- */
-	const [beneficiaries, setBeneficiaries] = useState(userData);
+	const [beneficiaries, setBeneficiaries] = useState(users);
 
 	/* --------------------------------------------------------------- */
 	const renderAvatar = (b) =>
@@ -436,8 +437,7 @@ const BeneficiariesManagement = () => {
 		{ header: "Sub‑Programme", accessor: "subProgramme" },
 		{ header: "Device", accessor: "device" },
 		{ header: "Created", accessor: "enrolled" },
-		{ header: "Role", accessor: "role" },
-		{ header: "Status", accessor: "status"}
+		{ header: "Role", accessor: "role"}
 	];
 
 	/* -------------------- handlers --------------------------------- */

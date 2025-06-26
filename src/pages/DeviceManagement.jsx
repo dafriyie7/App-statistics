@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ManagementTable } from "../components/Table"; // new path
+import { ManagementTable } from "../components/Table"; // adjust if the file name is different
+import device from "../components/devicedata"
 
 const DeviceManagement = () => {
 	const navigate = useNavigate();
 
-	/*  column definitions */
+	/* column definitions */
 	const deviceColumns = [
 		{ header: "Device ID", accessor: "deviceId" },
 		{ header: "Model", accessor: "model" },
@@ -17,31 +18,8 @@ const DeviceManagement = () => {
 		{ header: "Status", accessor: "status" },
 	];
 
-	/*  sample data – replace with API in useEffect later */
-	const [devices, setDevices] = useState([
-		{
-			id: 1,
-			deviceId: "SN-1234",
-			model: "Google Pixel 9 Pro XL",
-			organisation: "Parent Org A",
-			subProgramme: "Programme Alpha",
-			beneficiary: "Tiger Nixon",
-			enrolled: "2024-02-10",
-			lastSync: "2025-06-20 14:22",
-			status: "Active",
-		},
-		{
-			id: 2,
-			deviceId: "SN-5678",
-			model: "Samsung Galaxy S25 Ultra",
-			organisation: "Parent Org B",
-			subProgramme: "Programme Beta",
-			beneficiary: "Garrett Winters",
-			enrolled: "2024-05-02",
-			lastSync: "2025-06-24 09:10",
-			status: "Inactive",
-		},
-	]);
+	/* sample data – replace with a fetch in useEffect later */
+	const [devices, setDevices] = useState(device);
 
 	/* handlers */
 	const addDevice = () => navigate("/devices/new");
@@ -51,6 +29,7 @@ const DeviceManagement = () => {
 	const bulkDelete = (ids) =>
 		setDevices((prev) => prev.filter((d) => !ids.includes(d.id)));
 
+	/* optional extra tabs */
 	const extraTabs = [
 		{
 			id: "stats",
@@ -75,7 +54,8 @@ const DeviceManagement = () => {
 			onEdit={editDevice}
 			onDelete={deleteDevice}
 			onBulkDelete={bulkDelete}
-			rowLink={(d) => navigate(`/devices/${d.id}`)}
+			/* rowLink should return a URL string, not call navigate itself */
+			rowLink={(d) => `/devices/${d.id}`}
 			tabs={extraTabs}
 		/>
 	);

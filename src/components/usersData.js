@@ -1,5 +1,6 @@
 export default [
 	{
+		id: 1,
 		avatar: "https://randomuser.me/api/portraits/men/1.jpg",
 		name: "Kwame Mensah",
 		email: "kwame.mensah@example.com",
@@ -12,6 +13,7 @@ export default [
 		status: "Active",
 	},
 	{
+		id: 2,
 		avatar: "https://randomuser.me/api/portraits/women/2.jpg",
 		name: "Akua Boateng",
 		email: "akua.boateng@example.com",
@@ -24,6 +26,7 @@ export default [
 		status: "Active",
 	},
 	{
+		id: 3,
 		avatar: "https://randomuser.me/api/portraits/men/3.jpg",
 		name: "Kojo Owusu",
 		email: "kojo.owusu@example.com",
@@ -36,6 +39,7 @@ export default [
 		status: "Inactive",
 	},
 	{
+		id: 4,
 		avatar: "https://randomuser.me/api/portraits/women/4.jpg",
 		name: "Yaa Asantewaa",
 		email: "yaa.asantewaa@example.com",
@@ -48,6 +52,7 @@ export default [
 		status: "Active",
 	},
 	{
+		id: 5,
 		avatar: "https://randomuser.me/api/portraits/men/5.jpg",
 		name: "Nana Kofi",
 		email: "nana.kofi@example.com",
@@ -60,6 +65,7 @@ export default [
 		status: "Active",
 	},
 	{
+		id: 6,
 		avatar: "https://randomuser.me/api/portraits/women/6.jpg",
 		name: "Ama Serwaa",
 		email: "ama.serwaa@example.com",
@@ -72,6 +78,7 @@ export default [
 		status: "Inactive",
 	},
 	{
+		id: 7,
 		avatar: "https://randomuser.me/api/portraits/men/7.jpg",
 		name: "Yaw Ofori",
 		email: "yaw.ofori@example.com",
@@ -84,6 +91,7 @@ export default [
 		status: "Active",
 	},
 	{
+		id: 8,
 		avatar: "https://randomuser.me/api/portraits/women/8.jpg",
 		name: "Efua Mensima",
 		email: "efua.mensima@example.com",
@@ -96,6 +104,7 @@ export default [
 		status: "Active",
 	},
 	{
+		id: 9,
 		avatar: "https://randomuser.me/api/portraits/men/9.jpg",
 		name: "Daniel Quaye",
 		email: "daniel.quaye@example.com",
@@ -108,6 +117,7 @@ export default [
 		status: "Inactive",
 	},
 	{
+		id: 10,
 		avatar: "https://randomuser.me/api/portraits/women/10.jpg",
 		name: "Abena Korkor",
 		email: "abena.korkor@example.com",
@@ -120,4 +130,3 @@ export default [
 		status: "Active",
 	},
 ];
-  
