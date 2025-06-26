@@ -380,10 +380,10 @@
 
 // export default DeviceManagement;
 
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ManagementTable } from "../components/Table"; // adjust path as needed
+import userData from "../components/usersData";
 
 /*********************************************************************
  * BeneficiariesManagement                                           *
@@ -406,32 +406,7 @@ const BeneficiariesManagement = () => {
 	const navigate = useNavigate();
 
 	/* --------------------------------------------------------------- */
-	const [beneficiaries, setBeneficiaries] = useState([
-		{
-			id: 1,
-			photo: null,
-			name: "Tiger Nixon",
-			email: "tiger.nixon@example.com",
-			phone: "+233555010101",
-			district: "Accra Metro",
-			organisation: "Parent Org A",
-			subProgramme: "Programme Alpha",
-			device: "SN‑1234 (Pixel 9)",
-			enrolled: "2024-03-12",
-		},
-		{
-			id: 2,
-			photo: null,
-			name: "Garrett Winters",
-			email: "g.winters@example.com",
-			phone: "+233555020202",
-			district: "Kumasi",
-			organisation: "Parent Org B",
-			subProgramme: "Programme Beta",
-			device: "SN‑5678 (Galaxy S25)",
-			enrolled: "2024-05-07",
-		},
-	]);
+	const [beneficiaries, setBeneficiaries] = useState(userData);
 
 	/* --------------------------------------------------------------- */
 	const renderAvatar = (b) =>
@@ -460,7 +435,9 @@ const BeneficiariesManagement = () => {
 		{ header: "Org.", accessor: "organisation" },
 		{ header: "Sub‑Programme", accessor: "subProgramme" },
 		{ header: "Device", accessor: "device" },
-		{ header: "Enrolled", accessor: "enrolled" },
+		{ header: "Created", accessor: "enrolled" },
+		{ header: "Role", accessor: "role" },
+		{ header: "Status", accessor: "status"}
 	];
 
 	/* -------------------- handlers --------------------------------- */
