@@ -436,10 +436,37 @@ const BeneficiariesManagement = () => {
 		{ header: "Org.", accessor: "organisation" },
 		{ header: "Sub‑Programme", accessor: "subProgramme" },
 		{ header: "Device", accessor: "device" },
-		{ header: "Created", accessor: "enrolled" },
-		{ header: "Role", accessor: "role"}
+		{ header: "Created", accessor: "enrolled" }
 	];
 
+	const roleColumns = [
+	{header: "Name", accessor: "name"},
+		{ header: "Role", accessor: "role" },
+		{
+			header: "Permissions",
+			accessor: "permissions",
+			render: (row) =>
+				row.permissions?.length ? (
+					<div className="d-flex flex-wrap gap-1">
+						{row.permissions.map((p) => (
+							<span key={p} className="badge bg-secondary">
+								{p}
+							</span>
+						))}
+					</div>
+				) : (
+					<span className="text-muted">None</span>
+				),
+		},
+	];
+	  
+
+	const roleData = beneficiaries.map(({ id, name, role, permissions }) => ({
+		id,
+		name,
+		role,
+		permissions,
+	}));
 	/* -------------------- handlers --------------------------------- */
 	const addBeneficiary = () => navigate("/beneficiaries/new");
 	const editBeneficiary = (b) => navigate(`/beneficiaries/${b.id}/edit`);
@@ -450,17 +477,23 @@ const BeneficiariesManagement = () => {
 
 	const extraTabs = [
 		{
-			id: "stats",
-			label: "Device Stats",
+			id: "roles",
+			label: "Roles & Permissions",
 			content: (
-				<div className="p-4 text-muted">Device charts coming soon…</div>
+				<div className="p-4 text-muted">
+					<ManagementTable
+						title="Roles & Permissions"
+						columns={roleColumns}
+						data={roleData}
+						searchKeys={["role", "permissions"]}
+					/>
+				</div>
 			),
 		},
 	];
-
 	return (
 		<ManagementTable
-			title="Beneficiaries"
+			title="Beneficiaries Managment"
 			data={beneficiaries}
 			columns={columns}
 			searchKeys={["name", "email", "phone"]}

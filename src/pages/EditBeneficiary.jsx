@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-// ────────────────────────────────────────────────────────────────────
-//  Mock helpers — swap with real API later
-// ────────────────────────────────────────────────────────────────────
+/*********************************************************************
+ * EditBeneficiary Page — now includes permission checkboxes         *
+ *********************************************************************/
+
+// ⚠️ Mock fetch — replace with real API later
 const mockFetchBeneficiaryById = (id) =>
 	Promise.resolve({
-		id: 10,
-		avatar: "https://randomuser.me/api/portraits/women/10.jpg",
-		name: "Abena Korkor",
-		email: "abena.korkor@example.com",
-		district: "Savannah",
-		organisation: "AgriGirls",
-		subProgramme: "Agri Training",
-		device: "Tablet F7",
-		enrolled: "2025-06-10",
-		role: "user",
+		id: 1,
+		avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+		name: "Kwame Mensah",
+		email: "kwame.mensah@example.com",
+		district: "Greater Accra",
+		organisation: "HealthLink Ghana",
+		subProgramme: "Maternal Health",
+		device: "Tablet A100",
+		enrolled: "2025-05-12",
+		role: "admin",
 		status: "Active",
+		permissions: ["view", "create", "edit", "delete"],
 	});
 
-// ────────────────────────────────────────────────────────────────────
-//  EditBeneficiary Page — simple local‑state mock (no axios)
-// ────────────────────────────────────────────────────────────────────
+const ALL_PERMISSIONS = ["view", "create", "edit", "delete"];
+
 const EditBeneficiary = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -34,6 +36,18 @@ const EditBeneficiary = () => {
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const togglePermission = (perm) => {
+		setFormData((prev) => {
+			const has = prev.permissions.includes(perm);
+			return {
+				...prev,
+				permissions: has
+					? prev.permissions.filter((p) => p !== perm)
+					: [...prev.permissions, perm],
+			};
+		});
 	};
 
 	const handleSubmit = (e) => {
@@ -61,7 +75,6 @@ const EditBeneficiary = () => {
 						required
 					/>
 				</div>
-
 				{/* Email */}
 				<div className="col-md-6">
 					<label className="form-label">Email</label>
@@ -74,7 +87,6 @@ const EditBeneficiary = () => {
 						required
 					/>
 				</div>
-
 				{/* District */}
 				<div className="col-md-6">
 					<label className="form-label">District</label>
@@ -86,7 +98,6 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
-
 				{/* Organisation */}
 				<div className="col-md-6">
 					<label className="form-label">Organisation</label>
@@ -98,7 +109,6 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
-
 				{/* Sub‑Programme */}
 				<div className="col-md-6">
 					<label className="form-label">Sub‑Programme</label>
@@ -110,7 +120,6 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
-
 				{/* Assigned Device */}
 				<div className="col-md-6">
 					<label className="form-label">Assigned Device</label>
@@ -122,9 +131,8 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
-
 				{/* Role */}
-				<div className="col-md-6">
+				<div className="col-md-3">
 					<label className="form-label">Role</label>
 					<select
 						name="role"
@@ -136,9 +144,8 @@ const EditBeneficiary = () => {
 						<option value="admin">Admin</option>
 					</select>
 				</div>
-
 				{/* Status */}
-				<div className="col-md-6">
+				<div className="col-md-3">
 					<label className="form-label">Status</label>
 					<select
 						name="status"
@@ -151,7 +158,32 @@ const EditBeneficiary = () => {
 						<option value="Disabled">Disabled</option>
 					</select>
 				</div>
-
+				{/* Permissions */}
+				<div className="col-12">
+					<label className="form-label d-block">Permissions</label>
+					<div className="d-flex flex-wrap gap-3">
+						{ALL_PERMISSIONS.map((perm) => (
+							<div className="form-check" key={perm}>
+								<input
+									className="form-check-input"
+									type="checkbox"
+									id={perm}
+									checked={formData.permissions.includes(
+										perm
+									)}
+									onChange={() => togglePermission(perm)}
+								/>
+								<label
+									className="form-check-label"
+									htmlFor={perm}
+								>
+									{perm.charAt(0).toUpperCase() +
+										perm.slice(1)}
+								</label>
+							</div>
+						))}
+					</div>
+				</div>
 				{/* Date Enrolled (read‑only) */}
 				<div className="col-md-6">
 					<label className="form-label">Date Enrolled</label>
@@ -162,8 +194,15 @@ const EditBeneficiary = () => {
 						className="form-control-plaintext"
 					/>
 				</div>
-
-				<div className="col-12 d-flex justify-content-end">
+				{/* Actions */}
+				<div className="col-12 d-flex justify-content-end gap-2">
+					<button
+						type="button"
+						className="btn btn-outline-secondary"
+						onClick={() => navigate(-1)}
+					>
+						Cancel
+					</button>
 					<button type="submit" className="btn btn-primary">
 						Save Changes
 					</button>

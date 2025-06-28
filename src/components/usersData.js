@@ -11,6 +11,7 @@ export default [
 		enrolled: "2025-05-12",
 		role: "admin",
 		status: "Active",
+		permissions: ["view", "create", "edit", "delete"],
 	},
 	{
 		id: 2,
@@ -24,6 +25,7 @@ export default [
 		enrolled: "2025-04-18",
 		role: "admin",
 		status: "Active",
+		permissions: ["view", "create", "edit", "delete"],
 	},
 	{
 		id: 3,
@@ -37,6 +39,7 @@ export default [
 		enrolled: "2025-03-25",
 		role: "user",
 		status: "Inactive",
+		permissions: ["view"],
 	},
 	{
 		id: 4,
@@ -50,6 +53,7 @@ export default [
 		enrolled: "2025-05-01",
 		role: "user",
 		status: "Active",
+		permissions: ["view"],
 	},
 	{
 		id: 5,
@@ -63,6 +67,7 @@ export default [
 		enrolled: "2025-06-02",
 		role: "user",
 		status: "Active",
+		permissions: ["view"],
 	},
 	{
 		id: 6,
@@ -76,6 +81,7 @@ export default [
 		enrolled: "2025-05-21",
 		role: "user",
 		status: "Inactive",
+		permissions: ["view"],
 	},
 	{
 		id: 7,
@@ -89,6 +95,7 @@ export default [
 		enrolled: "2025-04-15",
 		role: "user",
 		status: "Active",
+		permissions: ["view"],
 	},
 	{
 		id: 8,
@@ -102,6 +109,7 @@ export default [
 		enrolled: "2025-03-30",
 		role: "user",
 		status: "Active",
+		permissions: ["view"],
 	},
 	{
 		id: 9,
@@ -115,6 +123,7 @@ export default [
 		enrolled: "2025-04-07",
 		role: "user",
 		status: "Inactive",
+		permissions: ["view"],
 	},
 	{
 		id: 10,
@@ -128,5 +137,6 @@ export default [
 		enrolled: "2025-06-10",
 		role: "user",
 		status: "Active",
+		permissions: ["view"],
 	},
 ];
