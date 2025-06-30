@@ -7,6 +7,8 @@ import Rect2 from "../components/Rect2";
 import Square from "../components/Square";
 import Brect from "../components/Brect";
 import Dropdown from "../components/Dropdown";
+import MixedChart from "../components/Chartjs/MixedChart";
+import BarChart from "../components/Chartjs/BarChart";
 
 const Dashboard1j = () => {
 	return (
@@ -14,36 +16,40 @@ const Dashboard1j = () => {
 			<div className="row">
 				<div className="row">
 					<Rect1
-						name="Daniel"
-						title="congratulations"
-						text="You are the best seller of this month"
-						figure="$200.5k"
-						button="View Details"
-						round="58% of sales target"
+						name="Monthly Usage Summary"
+						title="Top App This Month"
+						text="TikTok led usage this month with the highest active hours across all tracked devices."
+						figure="654 hrs"
+						button="View App Stats"
+						round="15% ↑ from last month"
 					/>
+
 					<SmallSquare
 						chart={<LineChart />}
-						title={"Total Users"}
-						figure={"248k"}
-						icon={"trending_up"}
+						title="Total Users"
+						figure="248k"
+						icon="groups"
 					/>
+
 					<SmallSquare
-						chart={<LineChart />}
-						title={"Total Apps"}
-						figure={"248k"}
-						icon={"trending_up"}
+						chart={<MixedChart />}
+						title="Total Apps Tracked"
+						figure="143"
+						icon="apps"
 					/>
+
 					<SmallSquare
 						chart={<BarChart2 />}
-						title={"Total Users"}
-						figure={"248k"}
-						icon={"trending_up"}
+						title="Total Active Sessions"
+						figure="38.9k"
+						icon="bolt"
 					/>
+
 					<SmallSquare
-						chart={<LineChart />}
-						title={"Total Users"}
-						figure={"248k"}
-						icon={"trending_up"}
+						chart={<BarChart />}
+						title="Total Time Tracked"
+						figure="2,354 hrs"
+						icon="timer"
 					/>
 				</div>
 				{/* <!--end row--> */}
