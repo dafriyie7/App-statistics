@@ -1,56 +1,59 @@
 import { useEffect, useState } from "react";
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Required for Bootstrap components
-
-import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-// Plugins
+/* Plugin & CSS Imports */
+import "../assets/css/pace.min.css";
 import "../assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css";
 import "../assets/plugins/metismenu/metisMenu.min.css";
 import "../assets/plugins/metismenu/mm-vertical.css";
 import "../assets/plugins/simplebar/css/simplebar.css";
 
-// Bootstrap layout
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/bootstrap-extended.css";
 
-// Your themes
-import "../sass/main.scss"; // ✅ light theme wrapped in [data-bs-theme="light"]
-import "../sass/dark-theme.css"; // ✅ dark theme with [data-bs-theme="dark"]
-
-// Optional
+/* Theme CSS files */
+import "../sass/main.css"; // light theme
+import "../sass/dark-theme.css"; // dark theme
+import "../sass/blue-theme.css"; // blue theme (data-bs-theme="blue-theme")
+import "../sass/semi-dark.css";
+import "../sass/bordered-theme.css";
 import "../sass/responsive.css";
 
-
-// import "../sass/main.scss";
-
-const ThemeBtn = () => {const [selectedTheme, setSelectedTheme] = useState("light");
-
-	const handleThemeChange = (theme) => {
-		setSelectedTheme(theme);
-
-		const html = document.documentElement;
-		html.setAttribute("data-bs-theme", theme);
-
-		localStorage.setItem("theme", theme);
-	};
-	  
-	
-
-	// Load saved theme on page load
-	useEffect(() => {
-		const savedTheme = localStorage.getItem("theme") || "light";
-		handleThemeChange(savedTheme);
-	}, []);
-	
-	
 const themes = [
 	{ id: "LightTheme", label: "Light", icon: "light_mode", theme: "light" },
 	{ id: "DarkTheme", label: "Dark", icon: "dark_mode", theme: "dark" },
+	{ id: "BlueTheme", label: "Blue", icon: "color_lens", theme: "blue-theme" },
+	{
+		id: "SemiDarkTheme",
+		label: "Semi Dark",
+		icon: "brightness_4",
+		theme: "semi-dark",
+	},
+	{
+		id: "BorderedTheme",
+		label: "Bordered",
+		icon: "border_all",
+		theme: "bordered",
+	},
 ];
+
+const ThemeBtn = () => {
+	const [selectedTheme, setSelectedTheme] = useState("light");
+
+	const applyTheme = (theme) => {
+		setSelectedTheme(theme);
+		document.documentElement.setAttribute("data-bs-theme", theme);
+		localStorage.setItem("theme", theme);
+	};
+
+	useEffect(() => {
+		const saved = localStorage.getItem("theme") || "light";
+		applyTheme(saved);
+	}, []);
 
 	return (
 		<>
+			{/* Theme Offcanvas Panel */}
 			<div
 				className="offcanvas offcanvas-end"
 				data-bs-scroll="true"
@@ -62,13 +65,12 @@ const themes = [
 						<h5 className="mb-0">Theme Customizer</h5>
 						<p className="mb-0">Customize your theme</p>
 					</div>
-					<a
-						href="#"
-						className="primaery-menu-close"
+					<button
+						className="primaery-menu-close btn"
 						data-bs-dismiss="offcanvas"
 					>
 						<i className="material-icons-outlined">close</i>
-					</a>
+					</button>
 				</div>
 
 				<div className="offcanvas-body">
@@ -82,7 +84,7 @@ const themes = [
 									name="theme-options"
 									id={id}
 									checked={selectedTheme === theme}
-									onChange={() => handleThemeChange(theme)}
+									onChange={() => applyTheme(theme)}
 								/>
 								<label
 									className="btn btn-outline-secondary d-flex flex-column gap-1 align-items-center justify-content-center p-4"
@@ -99,13 +101,15 @@ const themes = [
 				</div>
 			</div>
 
+			{/* Floating Customize Button */}
 			<button
 				className="btn btn-grd btn-grd-primary position-fixed bottom-0 end-0 m-3 d-flex align-items-center gap-2"
 				type="button"
 				data-bs-toggle="offcanvas"
 				data-bs-target="#staticBackdrop"
 			>
-				<i className="material-icons-outlined">tune</i>Customize
+				<i className="material-icons-outlined">tune</i>
+				Customize
 			</button>
 		</>
 	);
