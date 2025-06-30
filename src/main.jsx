@@ -24,7 +24,7 @@ import "./sass/dark-theme.css";
 // Fonts (load in public/index.html for best performance)
 
 
-// import "./light-fix.css";
+import "./light-fix.css";
 
 
 

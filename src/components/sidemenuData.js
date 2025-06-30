@@ -14,9 +14,9 @@ export default [
 				link: "user",
 			},
 			{
-				title: "Users",
+				title: "Beneficiaries",
 				icon: "arrow_right",
-				link: "users"
+				link: "beneficiaries",
 			},
 			{
 				title: "Device management",

@@ -1,23 +1,28 @@
 import { useEffect, useState } from "react";
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Required for Bootstrap components
+
+import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-import "../assets/css/pace.min.css";
-
-/* <!--plugins--> */
+// Plugins
 import "../assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css";
 import "../assets/plugins/metismenu/metisMenu.min.css";
 import "../assets/plugins/metismenu/mm-vertical.css";
 import "../assets/plugins/simplebar/css/simplebar.css";
-/* <!--bootstrap css--> */
+
+// Bootstrap layout
 import "../assets/css/bootstrap.min.css";
-/* <!--main css--> */
 import "../assets/css/bootstrap-extended.css";
-import "../sass/main.css";
-import "../sass/dark-theme.css";
-import "../sass/blue-theme.css";
-import "../sass/semi-dark.css";
-import "../sass/bordered-theme.css";
+
+// Your themes
+import "../sass/main.scss"; // ✅ light theme wrapped in [data-bs-theme="light"]
+import "../sass/dark-theme.css"; // ✅ dark theme with [data-bs-theme="dark"]
+
+// Optional
 import "../sass/responsive.css";
+
+
+// import "../sass/main.scss";
 
 const ThemeBtn = () => {const [selectedTheme, setSelectedTheme] = useState("light");
 
@@ -39,34 +44,10 @@ const ThemeBtn = () => {const [selectedTheme, setSelectedTheme] = useState("ligh
 	}, []);
 	
 	
-	const themes = [
-		{
-			id: "LightTheme",
-			label: "Light",
-			icon: "light_mode",
-			theme: "light",
-		},
-		{ id: "DarkTheme", label: "Dark", icon: "dark_mode", theme: "dark" },
-		{
-			id: "BlueTheme",
-			label: "Blue",
-			icon: "color_lens",
-			theme: "blue-theme",
-		}, // fix this
-		{
-			id: "SemiDarkTheme",
-			label: "Semi Dark",
-			icon: "brightness_4",
-			theme: "semi-dark",
-		},
-		{
-			id: "BorderedTheme",
-			label: "Bordered",
-			icon: "border_all",
-			theme: "bordered",
-		},
-	];
-	
+const themes = [
+	{ id: "LightTheme", label: "Light", icon: "light_mode", theme: "light" },
+	{ id: "DarkTheme", label: "Dark", icon: "dark_mode", theme: "dark" },
+];
 
 	return (
 		<>

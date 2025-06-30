@@ -27,7 +27,7 @@ function App() {
 					<Route path="details" element={<Details />} />
 					<Route path="user" element={<UserAnalyticsCard />} />
 					<Route path="analytics" element={<Details />} />
-					<Route path="users" element={<BeneficiariesManagement />} />
+					<Route path="beneficiaries" element={<BeneficiariesManagement />} />
 					<Route
 						path="device-management"
 						element={<DeviceManagement />}
