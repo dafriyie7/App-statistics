@@ -5,7 +5,7 @@ const activities = [
 		date: "29 Jun, 2025",
 		time: "08:20 AM",
 		name: "Kwame Mensah",
-		type: "Synced Forms",
+		type: "Form Sync",
 		status: "Success",
 		device: "Tablet A100",
 	},
@@ -13,7 +13,7 @@ const activities = [
 		date: "28 Jun, 2025",
 		time: "04:50 PM",
 		name: "Ama Serwaa",
-		type: "Login",
+		type: "Login Attempt",
 		status: "Failed",
 		device: "Smartphone B20",
 	},
@@ -21,7 +21,7 @@ const activities = [
 		date: "28 Jun, 2025",
 		time: "02:13 PM",
 		name: "Yaw Owusu",
-		type: "Updated Beneficiary Info",
+		type: "Beneficiary Update",
 		status: "Success",
 		device: "Tablet A100",
 	},
@@ -29,7 +29,7 @@ const activities = [
 		date: "27 Jun, 2025",
 		time: "10:05 AM",
 		name: "Afia Boateng",
-		type: "Synced Forms",
+		type: "Form Sync",
 		status: "Success",
 		device: "Tablet X200",
 	},
@@ -43,6 +43,17 @@ const activities = [
 	},
 ];
 
+const getStatusClass = (status) => {
+	switch (status.toLowerCase()) {
+		case "success":
+			return "bg-success text-success";
+		case "failed":
+			return "bg-danger text-danger";
+		default:
+			return "bg-secondary text-dark";
+	}
+};
+
 const RecentActivity = () => {
 	return (
 		<div className="col-12 col-xxl-6 d-flex">
@@ -50,7 +61,7 @@ const RecentActivity = () => {
 				<div className="card-body">
 					{/* Header */}
 					<div className="d-flex align-items-start justify-content-between mb-3">
-						<h5 className="mb-0">Recent App Activity</h5>
+						<h5 className="mb-0">Recent User Activity</h5>
 						<Dropdown />
 					</div>
 
@@ -83,11 +94,9 @@ const RecentActivity = () => {
 										<td>{act.type}</td>
 										<td>
 											<span
-												className={`badge rounded-pill bg-opacity-10 ${
-													act.status === "Success"
-														? "bg-success text-success"
-														: "bg-danger text-danger"
-												}`}
+												className={`badge rounded-pill bg-opacity-10 ${getStatusClass(
+													act.status
+												)}`}
 											>
 												{act.status}
 											</span>

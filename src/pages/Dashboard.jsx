@@ -9,8 +9,24 @@ import Brect from "../components/Brect";
 import Dropdown from "../components/Dropdown";
 import MixedChart from "../components/Chartjs/MixedChart";
 import BarChart from "../components/Chartjs/BarChart";
+import data from "../components/usageData";
+import { useState, useEffect } from "react";
 
 const Dashboard1j = () => {
+	const [usage, setUsage] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	// pretend-fetch
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setUsage(data); // in real life this would be fetch("…/api").then(res=>res.json())
+			setLoading(false);
+		}, 600); // simulate network latency
+		return () => clearTimeout(timer);
+	}, []);
+
+	if (loading) return <p>Loading…</p>;
+
 	return (
 		<>
 			<div className="row">
@@ -158,9 +174,30 @@ const Dashboard1j = () => {
 				{/* <!--end row--> */}
 
 				<div className="row">
-					<Square />
-					<Square />
-					<Square />
+					<Square
+						title="App Usage"
+						total={654}
+						totalTrend={15}
+						totalLabel="Total usage this month"
+						unit="hrs"
+						data={usage}
+					/>
+					<Square
+						title="App Usage"
+						total={654}
+						totalTrend={15}
+						totalLabel="Total usage this month"
+						unit="hrs"
+						data={usage}
+					/>
+					<Square
+						title="App Usage"
+						total={654}
+						totalTrend={15}
+						totalLabel="Total usage this month"
+						unit="hrs"
+						data={usage}
+					/>
 				</div>
 				{/* <!--end row--> */}
 
