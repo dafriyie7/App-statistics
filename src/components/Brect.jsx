@@ -1,252 +1,100 @@
 import Dropdown from "./Dropdown";
-const Brect = () => {
+
+const activities = [
+	{
+		date: "29 Jun, 2025",
+		time: "08:20 AM",
+		name: "Kwame Mensah",
+		type: "Synced Forms",
+		status: "Success",
+		device: "Tablet A100",
+	},
+	{
+		date: "28 Jun, 2025",
+		time: "04:50 PM",
+		name: "Ama Serwaa",
+		type: "Login",
+		status: "Failed",
+		device: "Smartphone B20",
+	},
+	{
+		date: "28 Jun, 2025",
+		time: "02:13 PM",
+		name: "Yaw Owusu",
+		type: "Updated Beneficiary Info",
+		status: "Success",
+		device: "Tablet A100",
+	},
+	{
+		date: "27 Jun, 2025",
+		time: "10:05 AM",
+		name: "Afia Boateng",
+		type: "Synced Forms",
+		status: "Success",
+		device: "Tablet X200",
+	},
+	{
+		date: "27 Jun, 2025",
+		time: "09:30 AM",
+		name: "Kojo Asamoah",
+		type: "Login",
+		status: "Success",
+		device: "Phone T120",
+	},
+];
+
+const RecentActivity = () => {
 	return (
 		<div className="col-12 col-xxl-6 d-flex">
 			<div className="card rounded-4 w-100">
 				<div className="card-body">
+					{/* Header */}
 					<div className="d-flex align-items-start justify-content-between mb-3">
-						<div className="">
-							<h5 className="mb-0">Transactions</h5>
-						</div>
+						<h5 className="mb-0">Recent App Activity</h5>
 						<Dropdown />
 					</div>
+
+					{/* Table */}
 					<div className="table-responsive">
 						<table className="table align-middle mb-0 table-striped">
 							<thead>
 								<tr>
 									<th>Date</th>
-									<th>Source Name</th>
+									<th>User</th>
+									<th>Activity</th>
 									<th>Status</th>
-									<th>Amount</th>
+									<th>Device</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<div className="">
-											<h6 className="mb-0">
-												10 Sep,2024
-											</h6>
-											<p className="mb-0">8:20 PM</p>
-										</div>
-									</td>
-									<td>
-										<div className="d-flex align-items-center flex-row gap-3">
-											<div className="">
-												<img
-													src="assets/images/apps/paypal.png"
-													width="35"
-													alt=""
-												/>
-											</div>
-											<div className="">
-												<h6 className="mb-0">Paypal</h6>
-												<p className="mb-0">
-													Business Plan
-												</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div className="card-lable bg-success text-success bg-opacity-10">
-											<p className="text-success mb-0">
-												Paid
-											</p>
-										</div>
-									</td>
-									<td>
-										<h5 className="mb-0">$5897</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div className="">
-											<h6 className="mb-0">
-												10 Sep,2024
-											</h6>
-											<p className="mb-0">8:20 PM</p>
-										</div>
-									</td>
-									<td>
-										<div className="d-flex align-items-center flex-row gap-3">
-											<div className="">
-												<img
-													src="assets/images/apps/13.png"
-													width="35"
-													alt=""
-												/>
-											</div>
-											<div className="">
-												<h6 className="mb-0">Visa</h6>
-												<p className="mb-0">
-													Business Plan
-												</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div className="card-lable bg-danger text-danger bg-opacity-10">
-											<p className="text-danger mb-0">
-												Unpaid
-											</p>
-										</div>
-									</td>
-									<td>
-										<h5 className="mb-0">$9638</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div className="">
-											<h6 className="mb-0">
-												10 Sep,2024
-											</h6>
-											<p className="mb-0">8:20 PM</p>
-										</div>
-									</td>
-									<td>
-										<div className="d-flex align-items-center flex-row gap-3">
-											<div className="">
-												<img
-													src="assets/images/apps/behance.png"
-													width="35"
-													alt=""
-												/>
-											</div>
-											<div className="">
+								{activities.map((act, i) => (
+									<tr key={i}>
+										<td>
+											<div>
 												<h6 className="mb-0">
-													Behance
+													{act.date}
 												</h6>
-												<p className="mb-0">
-													Business Plan
-												</p>
+												<small>{act.time}</small>
 											</div>
-										</div>
-									</td>
-									<td>
-										<div className="card-lable bg-success text-success bg-opacity-10">
-											<p className="text-success mb-0">
-												Paid
-											</p>
-										</div>
-									</td>
-									<td>
-										<h5 className="mb-0">$9638</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div className="">
-											<h6 className="mb-0">
-												10 Sep,2024
-											</h6>
-											<p className="mb-0">8:20 PM</p>
-										</div>
-									</td>
-									<td>
-										<div className="d-flex align-items-center flex-row gap-3">
-											<div className="">
-												<img
-													src="assets/images/apps/07.png"
-													width="35"
-													alt=""
-												/>
-											</div>
-											<div className="">
-												<h6 className="mb-0">
-													Spotify
-												</h6>
-												<p className="mb-0">
-													Business Plan
-												</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div className="card-lable bg-success text-success bg-opacity-10">
-											<p className="text-success mb-0">
-												Paid
-											</p>
-										</div>
-									</td>
-									<td>
-										<h5 className="mb-0">$9638</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div className="">
-											<h6 className="mb-0">
-												10 Sep,2024
-											</h6>
-											<p className="mb-0">8:20 PM</p>
-										</div>
-									</td>
-									<td>
-										<div className="d-flex align-items-center flex-row gap-3">
-											<div className="">
-												<img
-													src="assets/images/apps/05.png"
-													width="35"
-													alt=""
-												/>
-											</div>
-											<div className="">
-												<h6 className="mb-0">Google</h6>
-												<p className="mb-0">
-													Business Plan
-												</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div className="card-lable bg-danger text-danger bg-opacity-10">
-											<p className="text-danger mb-0">
-												Unpaid
-											</p>
-										</div>
-									</td>
-									<td>
-										<h5 className="mb-0">$9638</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div className="">
-											<h6 className="mb-0">
-												10 Sep,2024
-											</h6>
-											<p className="mb-0">8:20 PM</p>
-										</div>
-									</td>
-									<td>
-										<div className="d-flex align-items-center flex-row gap-3">
-											<div className="">
-												<img
-													src="assets/images/apps/apple.png"
-													width="35"
-													alt=""
-												/>
-											</div>
-											<div className="">
-												<h6 className="mb-0">Apple</h6>
-												<p className="mb-0">
-													Business Plan
-												</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<div className="card-lable bg-success text-success bg-opacity-10">
-											<p className="text-success mb-0">
-												Paid
-											</p>
-										</div>
-									</td>
-									<td>
-										<h5 className="mb-0">$9638</h5>
-									</td>
-								</tr>
+										</td>
+										<td>
+											<h6 className="mb-0">{act.name}</h6>
+										</td>
+										<td>{act.type}</td>
+										<td>
+											<span
+												className={`badge rounded-pill bg-opacity-10 ${
+													act.status === "Success"
+														? "bg-success text-success"
+														: "bg-danger text-danger"
+												}`}
+											>
+												{act.status}
+											</span>
+										</td>
+										<td>{act.device}</td>
+									</tr>
+								))}
 							</tbody>
 						</table>
 					</div>
@@ -256,4 +104,4 @@ const Brect = () => {
 	);
 };
 
-export default Brect;
+export default RecentActivity;
