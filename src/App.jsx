@@ -9,6 +9,7 @@ import BeneficiariesManagement from "./pages/BeneficiariesManagement";
 import DeviceManagement from "./pages/DeviceManagement";
 import EditBeneficiary from "./pages/EditBeneficiary";
 import EditDevice from "./pages/EditDevice";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				{/* Public Routes (No Layout) */}
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/register" element={<SignUp />} />
+				<Route path="/reset-password" element={<ResetPassword />} />
 
 				{/* Protected Routes (With Layout) */}
 				<Route path="/" element={<Layout />}>

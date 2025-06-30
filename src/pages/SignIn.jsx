@@ -168,7 +168,7 @@ const LoginPage = () => {
 									</div>
 
 									<div className="col-md-6 text-end">
-										<a href="/forgot-password">
+										<a href="/reset-password">
 											Forgot Password?
 										</a>
 									</div>
