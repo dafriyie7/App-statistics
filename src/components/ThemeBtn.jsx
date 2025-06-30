@@ -88,7 +88,7 @@ const ThemeBtn = () => {
 				data-bs-target="#staticBackdrop"
 			>
 				<i className="material-icons-outlined">tune</i>
-				Customize
+				Theme
 			</button>
 		</>
 	);
