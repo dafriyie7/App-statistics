@@ -10,6 +10,10 @@ import DeviceManagement from "./pages/DeviceManagement";
 import EditBeneficiary from "./pages/EditBeneficiary";
 import EditDevice from "./pages/EditDevice";
 import ResetPassword from "./pages/ResetPassword";
+import UserManagement from "./pages/UserManagement";
+import EditUser from "./pages/EditUser";
+import AddBeneficiary from "./pages/AddBeneficiary";
+import AddUser from "./pages/AddUser";
 
 function App() {
 	return (
@@ -27,7 +31,19 @@ function App() {
 					<Route path="details" element={<Details />} />
 					<Route path="user" element={<UserAnalyticsCard />} />
 					<Route path="analytics" element={<Details />} />
-					<Route path="beneficiaries" element={<BeneficiariesManagement />} />
+					<Route
+						path="beneficiaries"
+						element={<BeneficiariesManagement />}
+					/>
+					<Route
+						path="beneficiaries/users"
+						element={<UserManagement />}
+					/>
+					<Route
+						path="beneficiaries/device-management"
+						element={<DeviceManagement />}
+					/>
+					<Route path="users" element={<UserManagement />} />
 					<Route
 						path="device-management"
 						element={<DeviceManagement />}
@@ -36,7 +52,14 @@ function App() {
 						path="/beneficiaries/:id/edit"
 						element={<EditBeneficiary />}
 					/>
+					<Route path="/users/:id/edit" element={<EditUser />} />
 					<Route path="devices/:id/edit" element={<EditDevice />} />
+					<Route
+						path="/beneficiaries/new"
+						element={<AddBeneficiary />}
+					/>
+					<Route path="/users/new" element={<AddUser />} />
+
 				</Route>
 			</Routes>
 		</Router>

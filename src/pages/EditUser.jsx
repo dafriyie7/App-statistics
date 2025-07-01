@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import users from "../components/usersData"; // ← reuse same dataset
+import users from "../components/usersData"; // same dataset used in UserManagement
 
 /*********************************************************************
- * EditBeneficiary Page — loads actual beneficiary by ID             *
+ * EditUser Page — mirrors EditBeneficiary but for system users      *
  *********************************************************************/
 
-// 🟢 Mock fetch pulling from local array (swap with real API later)
-const mockFetchBeneficiaryById = (id) =>
+const mockFetchUserById = (id) =>
 	Promise.resolve(users.find((u) => u.id === Number(id)) || null);
 
 const ALL_PERMISSIONS = ["view", "create", "edit", "delete"];
 
-const EditBeneficiary = () => {
+const EditUser = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState(null);
 	const [error, setError] = useState(null);
 
+	/* ─────────────────────────────────────────────────────────────── */
 	useEffect(() => {
-		mockFetchBeneficiaryById(id).then((data) => {
+		mockFetchUserById(id).then((data) => {
 			if (data) setFormData(data);
-			else setError("Beneficiary not found");
+			else setError("User not found");
 		});
 	}, [id]);
 
+	/* ─────────────────────────────────────────────────────────────── */
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
@@ -44,17 +45,18 @@ const EditBeneficiary = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// 🔁 Replace with real PUT/PATCH call
-		console.log("Saving:", formData);
-		navigate("/beneficiaries");
+		// 🔁 Replace with real PUT/PATCH call when backend ready
+		console.log("Saving user:", formData);
+		navigate("/users");
 	};
 
+	/* ─────────────────────────────────────────────────────────────── */
 	if (error) return <div className="p-4 text-danger">{error}</div>;
 	if (!formData) return <div className="p-4">Loading…</div>;
 
 	return (
 		<div className="container py-4">
-			<h4>Edit Beneficiary</h4>
+			<h4>Edit User</h4>
 			<form onSubmit={handleSubmit} className="row g-3">
 				{/* Full Name */}
 				<div className="col-md-6">
@@ -80,17 +82,6 @@ const EditBeneficiary = () => {
 						required
 					/>
 				</div>
-				{/* District */}
-				<div className="col-md-6">
-					<label className="form-label">District</label>
-					<input
-						type="text"
-						name="district"
-						value={formData.district}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
 				{/* Organisation */}
 				<div className="col-md-6">
 					<label className="form-label">Organisation</label>
@@ -102,24 +93,13 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
-				{/* Sub‑Programme */}
+				{/* Avatar URL (optional) */}
 				<div className="col-md-6">
-					<label className="form-label">Sub‑Programme</label>
+					<label className="form-label">Avatar URL</label>
 					<input
 						type="text"
-						name="subProgramme"
-						value={formData.subProgramme}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
-				{/* Assigned Device */}
-				<div className="col-md-6">
-					<label className="form-label">Assigned Device</label>
-					<input
-						type="text"
-						name="device"
-						value={formData.device}
+						name="avatar"
+						value={formData.avatar || ""}
 						onChange={handleChange}
 						className="form-control"
 					/>
@@ -151,6 +131,17 @@ const EditBeneficiary = () => {
 						<option value="Disabled">Disabled</option>
 					</select>
 				</div>
+				{/* Created At (read-only) */}
+				<div className="col-md-6">
+					<label className="form-label">Created At</label>
+					<input
+						type="text"
+						name="enrolled"
+						value={formData.enrolled}
+						readOnly
+						className="form-control-plaintext"
+					/>
+				</div>
 				{/* Permissions */}
 				<div className="col-12">
 					<label className="form-label d-block">Permissions</label>
@@ -177,17 +168,6 @@ const EditBeneficiary = () => {
 						))}
 					</div>
 				</div>
-				{/* Date Enrolled (read‑only) */}
-				<div className="col-md-6">
-					<label className="form-label">Date Enrolled</label>
-					<input
-						type="text"
-						name="enrolled"
-						value={formData.enrolled}
-						readOnly
-						className="form-control-plaintext"
-					/>
-				</div>
 				{/* Actions */}
 				<div className="col-12 d-flex justify-content-end gap-2">
 					<button
@@ -206,4 +186,4 @@ const EditBeneficiary = () => {
 	);
 };
 
-export default EditBeneficiary;
+export default EditUser;

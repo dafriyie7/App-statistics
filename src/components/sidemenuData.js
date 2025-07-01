@@ -22,7 +22,12 @@ export default [
 				title: "Device management",
 				icon: "arrow_right",
 				link: "device-management"
-		}
+			},
+			{
+				title: "User management",
+				icon: "arrow_right",
+				link: "users",
+			},
 		],
 	},
 	{

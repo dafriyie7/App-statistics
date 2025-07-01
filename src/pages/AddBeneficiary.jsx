@@ -1,29 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import users from "../components/usersData"; // ← reuse same dataset
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /*********************************************************************
- * EditBeneficiary Page — loads actual beneficiary by ID             *
+ * AddBeneficiary Page                                              *
+ * ------------------------------------------------------------------*
+ * Presents a blank form to create a new beneficiary.                *
+ * (You can replace the onSubmit handler with a real POST later.)    *
  *********************************************************************/
-
-// 🟢 Mock fetch pulling from local array (swap with real API later)
-const mockFetchBeneficiaryById = (id) =>
-	Promise.resolve(users.find((u) => u.id === Number(id)) || null);
 
 const ALL_PERMISSIONS = ["view", "create", "edit", "delete"];
 
-const EditBeneficiary = () => {
-	const { id } = useParams();
-	const navigate = useNavigate();
-	const [formData, setFormData] = useState(null);
-	const [error, setError] = useState(null);
+const todayISO = () => new Date().toISOString().slice(0, 10); // YYYY‑MM‑DD
 
-	useEffect(() => {
-		mockFetchBeneficiaryById(id).then((data) => {
-			if (data) setFormData(data);
-			else setError("Beneficiary not found");
-		});
-	}, [id]);
+const AddBeneficiary = () => {
+	const navigate = useNavigate();
+
+	/* ─────────────────────────────────────────────────────────────── */
+	const [formData, setFormData] = useState({
+		id: Date.now(), // simple unique ID stub
+		avatar: "", // optional avatar URL
+		name: "",
+		email: "",
+		district: "",
+		organisation: "",
+		subProgramme: "",
+		device: "",
+		enrolled: todayISO(),
+		role: "user",
+		status: "Active",
+		permissions: ["view"],
+	});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -44,17 +50,15 @@ const EditBeneficiary = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// 🔁 Replace with real PUT/PATCH call
-		console.log("Saving:", formData);
-		navigate("/beneficiaries");
+		// 🔁 Replace with real POST call or context update
+		console.log("Creating new beneficiary:", formData);
+		navigate("/beneficiaries", { state: { newBeneficiary: formData } });
 	};
 
-	if (error) return <div className="p-4 text-danger">{error}</div>;
-	if (!formData) return <div className="p-4">Loading…</div>;
-
+	/* ─────────────────────────────────────────────────────────────── */
 	return (
 		<div className="container py-4">
-			<h4>Edit Beneficiary</h4>
+			<h4>Add Beneficiary</h4>
 			<form onSubmit={handleSubmit} className="row g-3">
 				{/* Full Name */}
 				<div className="col-md-6">
@@ -124,6 +128,17 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
+				{/* Avatar URL (optional) */}
+				<div className="col-md-6">
+					<label className="form-label">Avatar URL</label>
+					<input
+						type="text"
+						name="avatar"
+						value={formData.avatar}
+						onChange={handleChange}
+						className="form-control"
+					/>
+				</div>
 				{/* Role */}
 				<div className="col-md-3">
 					<label className="form-label">Role</label>
@@ -177,7 +192,7 @@ const EditBeneficiary = () => {
 						))}
 					</div>
 				</div>
-				{/* Date Enrolled (read‑only) */}
+				{/* Enrolled (read‑only today) */}
 				<div className="col-md-6">
 					<label className="form-label">Date Enrolled</label>
 					<input
@@ -198,7 +213,7 @@ const EditBeneficiary = () => {
 						Cancel
 					</button>
 					<button type="submit" className="btn btn-primary">
-						Save Changes
+						Add Beneficiary
 					</button>
 				</div>
 			</form>
@@ -206,4 +221,4 @@ const EditBeneficiary = () => {
 	);
 };
 
-export default EditBeneficiary;
+export default AddBeneficiary;

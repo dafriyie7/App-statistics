@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import users from "../components/usersData"; // ← reuse same dataset
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /*********************************************************************
- * EditBeneficiary Page — loads actual beneficiary by ID             *
+ * AddUser Page                                                     *
+ * ------------------------------------------------------------------*
+ * Blank form to create a new system user.                           *
+ * Swap the console.log with a real POST or context update later.    *
  *********************************************************************/
 
-// 🟢 Mock fetch pulling from local array (swap with real API later)
-const mockFetchBeneficiaryById = (id) =>
-	Promise.resolve(users.find((u) => u.id === Number(id)) || null);
-
 const ALL_PERMISSIONS = ["view", "create", "edit", "delete"];
+const todayISO = () => new Date().toISOString().slice(0, 10);
 
-const EditBeneficiary = () => {
-	const { id } = useParams();
+const AddUser = () => {
 	const navigate = useNavigate();
-	const [formData, setFormData] = useState(null);
-	const [error, setError] = useState(null);
 
-	useEffect(() => {
-		mockFetchBeneficiaryById(id).then((data) => {
-			if (data) setFormData(data);
-			else setError("Beneficiary not found");
-		});
-	}, [id]);
+	const [formData, setFormData] = useState({
+		id: Date.now(),
+		avatar: "",
+		name: "",
+		email: "",
+		organisation: "",
+		role: "user",
+		status: "Active",
+		permissions: ["view"],
+		enrolled: todayISO(),
+	});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -44,19 +45,15 @@ const EditBeneficiary = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// 🔁 Replace with real PUT/PATCH call
-		console.log("Saving:", formData);
-		navigate("/beneficiaries");
+		console.log("Creating user:", formData); // 🔁 replace with POST
+		navigate("/users", { state: { newUser: formData } });
 	};
-
-	if (error) return <div className="p-4 text-danger">{error}</div>;
-	if (!formData) return <div className="p-4">Loading…</div>;
 
 	return (
 		<div className="container py-4">
-			<h4>Edit Beneficiary</h4>
+			<h4>Add User</h4>
 			<form onSubmit={handleSubmit} className="row g-3">
-				{/* Full Name */}
+				{/* Name */}
 				<div className="col-md-6">
 					<label className="form-label">Full Name</label>
 					<input
@@ -80,17 +77,6 @@ const EditBeneficiary = () => {
 						required
 					/>
 				</div>
-				{/* District */}
-				<div className="col-md-6">
-					<label className="form-label">District</label>
-					<input
-						type="text"
-						name="district"
-						value={formData.district}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
 				{/* Organisation */}
 				<div className="col-md-6">
 					<label className="form-label">Organisation</label>
@@ -102,24 +88,13 @@ const EditBeneficiary = () => {
 						className="form-control"
 					/>
 				</div>
-				{/* Sub‑Programme */}
+				{/* Avatar URL */}
 				<div className="col-md-6">
-					<label className="form-label">Sub‑Programme</label>
+					<label className="form-label">Avatar URL</label>
 					<input
 						type="text"
-						name="subProgramme"
-						value={formData.subProgramme}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
-				{/* Assigned Device */}
-				<div className="col-md-6">
-					<label className="form-label">Assigned Device</label>
-					<input
-						type="text"
-						name="device"
-						value={formData.device}
+						name="avatar"
+						value={formData.avatar}
 						onChange={handleChange}
 						className="form-control"
 					/>
@@ -151,6 +126,17 @@ const EditBeneficiary = () => {
 						<option value="Disabled">Disabled</option>
 					</select>
 				</div>
+				{/* Created (read‑only) */}
+				<div className="col-md-6">
+					<label className="form-label">Created At</label>
+					<input
+						type="text"
+						name="enrolled"
+						value={formData.enrolled}
+						readOnly
+						className="form-control-plaintext"
+					/>
+				</div>
 				{/* Permissions */}
 				<div className="col-12">
 					<label className="form-label d-block">Permissions</label>
@@ -177,17 +163,6 @@ const EditBeneficiary = () => {
 						))}
 					</div>
 				</div>
-				{/* Date Enrolled (read‑only) */}
-				<div className="col-md-6">
-					<label className="form-label">Date Enrolled</label>
-					<input
-						type="text"
-						name="enrolled"
-						value={formData.enrolled}
-						readOnly
-						className="form-control-plaintext"
-					/>
-				</div>
 				{/* Actions */}
 				<div className="col-12 d-flex justify-content-end gap-2">
 					<button
@@ -198,7 +173,7 @@ const EditBeneficiary = () => {
 						Cancel
 					</button>
 					<button type="submit" className="btn btn-primary">
-						Save Changes
+						Add User
 					</button>
 				</div>
 			</form>
@@ -206,4 +181,4 @@ const EditBeneficiary = () => {
 	);
 };
 
-export default EditBeneficiary;
+export default AddUser;
