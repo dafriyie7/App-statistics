@@ -14,6 +14,7 @@ import UserManagement from "./pages/UserManagement";
 import EditUser from "./pages/EditUser";
 import AddBeneficiary from "./pages/AddBeneficiary";
 import AddUser from "./pages/AddUser";
+import DeviceDetails from "./pages/DeviceDetails";
 
 function App() {
 	return (
@@ -59,7 +60,7 @@ function App() {
 						element={<AddBeneficiary />}
 					/>
 					<Route path="/users/new" element={<AddUser />} />
-
+					<Route path="devices/:id" element={<DeviceDetails />} />
 				</Route>
 			</Routes>
 		</Router>

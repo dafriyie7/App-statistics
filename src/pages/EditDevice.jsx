@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import devices from "../components/devicedata"; // ← actual dataset
 
 /*********************************************************************
- * EditDevice Page – mock‑data, 100% safe against map errors         *
+ * EditDevice Page – loads real device by deviceId                   *
  *********************************************************************/
 
-// Fake device fetch — replace with real API later
-const mockFetchDeviceById = (id) =>
-	Promise.resolve({
-		id,
-		deviceId: "SN-1234",
-		model: "Google Pixel 9 Pro XL",
-		organisation: "Parent Org A",
-		subProgramme: "Programme Alpha",
-		beneficiaryId: 2,
-		enrolled: "2024-02-10",
-		lastSync: "2025-06-20 14:22",
-		status: "Active",
-	});
+// Mock “fetch” that simply finds the device locally
+const mockFetchDeviceByDeviceId = (deviceId) =>
+	Promise.resolve(devices.find((d) => d.deviceId === deviceId) ?? null);
 
-// Local mock list of beneficiaries
+// Local mock list of beneficiaries (replace with API later)
 const initialBeneficiaries = [
 	{ id: 1, name: "Asha Mensah" },
 	{ id: 2, name: "Tiger Nixon" },
@@ -27,22 +18,23 @@ const initialBeneficiaries = [
 ];
 
 const EditDevice = () => {
-	const { id } = useParams();
+	const { id: deviceId } = useParams(); // id IS the deviceId string
 	const navigate = useNavigate();
 
 	const [device, setDevice] = useState(null);
-	// Always start as an array so .map never fails
 	const [beneficiaries] = useState(initialBeneficiaries);
 	const [saving, setSaving] = useState(false);
 
 	/* ───── Load device once ───── */
 	useEffect(() => {
 		let mounted = true;
-		mockFetchDeviceById(id).then((data) => mounted && setDevice(data));
+		mockFetchDeviceByDeviceId(deviceId).then((data) => {
+			if (mounted) setDevice(data);
+		});
 		return () => {
 			mounted = false;
 		};
-	}, [id]);
+	}, [deviceId]);
 
 	/* ───── Handlers ───── */
 	const handleChange = (e) => {
@@ -68,13 +60,15 @@ const EditDevice = () => {
 		setTimeout(() => navigate("/device-management"), 500);
 	};
 
-	if (!device) return <div className="p-4">Loading…</div>;
+	if (device === null) return <div className="p-4">Loading…</div>;
+	if (device === undefined)
+		return <div className="p-4 text-danger">Device not found</div>;
 
 	return (
 		<div className="container py-4">
 			<h4>Edit Device</h4>
 			<form onSubmit={handleSubmit} className="row g-3">
-				{/* Device ID (read‑only) */}
+				{/* Device ID (read-only) */}
 				<div className="col-md-6">
 					<label className="form-label">Device ID</label>
 					<input
@@ -85,6 +79,7 @@ const EditDevice = () => {
 					/>
 				</div>
 
+				{/* Model */}
 				<div className="col-md-6">
 					<label className="form-label">Model / Name</label>
 					<input
@@ -97,6 +92,7 @@ const EditDevice = () => {
 					/>
 				</div>
 
+				{/* Org / Sub‑Programme */}
 				<div className="col-md-6">
 					<label className="form-label">Organisation</label>
 					<input
@@ -136,6 +132,7 @@ const EditDevice = () => {
 					</select>
 				</div>
 
+				{/* Status */}
 				<div className="col-md-6">
 					<label className="form-label">Status</label>
 					<select
@@ -168,6 +165,7 @@ const EditDevice = () => {
 					/>
 				</div>
 
+				{/* Save */}
 				<div className="col-12 d-flex justify-content-end">
 					<button
 						type="submit"

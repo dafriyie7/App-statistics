@@ -1,14 +1,25 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ManagementTable } from "../components/Table"; // adjust if the file name is different
-import device from "../components/devicedata"
+import { Link, useNavigate } from "react-router-dom";
+import { ManagementTable } from "../components/Table";
+import device from "../components/devicedata";
 
 const DeviceManagement = () => {
 	const navigate = useNavigate();
 
-	/* column definitions */
+	// 👉 Device ID column becomes a link
 	const deviceColumns = [
-		{ header: "Device ID", accessor: "deviceId" },
+		{
+			header: "Device ID",
+			accessor: "deviceId",
+			render: (d) => (
+				<Link
+					to={`/devices/${d.deviceId}`}
+					className="text-decoration-none"
+				>
+					{d.deviceId}
+				</Link>
+			),
+		},
 		{ header: "Model", accessor: "model" },
 		{ header: "Org.", accessor: "organisation" },
 		{ header: "Sub-Programme", accessor: "subProgramme" },
@@ -18,30 +29,14 @@ const DeviceManagement = () => {
 		{ header: "Status", accessor: "status" },
 	];
 
-	/* sample data – replace with a fetch in useEffect later */
 	const [devices, setDevices] = useState(device);
 
-	/* handlers */
 	const addDevice = () => navigate("/devices/new");
-	const editDevice = (d) => navigate(`/devices/${d.id}/edit`);
-	const deleteDevice = (id) =>
-		setDevices((prev) => prev.filter((d) => d.id !== id));
+	const editDevice = (d) => navigate(`/devices/${d.deviceId}/edit`);
+	const deleteDevice = (deviceId) =>
+		setDevices((prev) => prev.filter((d) => d.deviceId !== deviceId));
 	const bulkDelete = (ids) =>
-		setDevices((prev) => prev.filter((d) => !ids.includes(d.id)));
-
-	/* optional extra tabs */
-	const extraTabs = [
-		{
-			id: "stats",
-			label: "Device Stats",
-			content: <div className="p-4 text-muted">…</div>,
-		},
-		{
-			id: "history",
-			label: "History",
-			content: <div className="p-4 text-muted">…</div>,
-		},
-	];
+		setDevices((prev) => prev.filter((d) => !ids.includes(d.deviceId)));
 
 	return (
 		<ManagementTable
@@ -52,11 +47,9 @@ const DeviceManagement = () => {
 			addButtonLabel="Add Device"
 			onAdd={addDevice}
 			onEdit={editDevice}
-			onDelete={deleteDevice}
+			onDelete={(row) => deleteDevice(row.deviceId)}
 			onBulkDelete={bulkDelete}
-			/* rowLink should return a URL string, not call navigate itself */
-			rowLink={(d) => `/devices/${d.id}`}
-			tabs={extraTabs}
+			/* rowLink not needed because we link inside the first cell */
 		/>
 	);
 };
