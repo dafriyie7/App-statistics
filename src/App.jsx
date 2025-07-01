@@ -15,6 +15,7 @@ import EditUser from "./pages/EditUser";
 import AddBeneficiary from "./pages/AddBeneficiary";
 import AddUser from "./pages/AddUser";
 import DeviceDetails from "./pages/DeviceDetails";
+import AddDevice from "./pages/AddDevice";
 
 function App() {
 	return (
@@ -61,6 +62,8 @@ function App() {
 					/>
 					<Route path="/users/new" element={<AddUser />} />
 					<Route path="devices/:id" element={<DeviceDetails />} />
+					<Route path="devices/new" element={<AddDevice />} />
+					<Route path="devices/new" element={<AddDevice />} />
 				</Route>
 			</Routes>
 		</Router>
