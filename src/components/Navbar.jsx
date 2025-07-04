@@ -28,9 +28,6 @@ const Navbar = () => {
 					>
 						<i className="bi bi-list"></i>
 					</button>
-					<a className="navbar-brand fw-bold text-primary" href="/">
-						AppTracker
-					</a>
 				</div>
 
 				<form className="d-none d-lg-block w-50 mx-auto">

@@ -1,6 +1,5 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider } from "./context/ThemeContext";
 
 // Core styles
 import "bootstrap/dist/css/bootstrap.min.css";

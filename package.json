@@ -14,13 +14,19 @@
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",
     "chart.js": "^4.4.9",
+    "datatables.net-buttons": "^3.2.4",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "pace-js": "^1.2.4",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
     "react-chartjs-2": "^5.3.0",
+    "react-data-table-component": "^7.7.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.6.1"
+    "react-router-dom": "^7.6.1",
+    "styled-components": "^6.1.19",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
