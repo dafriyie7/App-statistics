@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ThemeBtn from "../components/ThemeBtn";
-import logo from "../assets/images/logo1.png";
-
+import users from "../components/logins"
 /** 🔑 TEMP – replace with fetch("/api/auth/login", …) later */
-const users = [
-	{ email: "daniel@gmail.com", password: "daniel", name: "Daniel" },
-	{ email: "admin@example.com", password: "admin123", name: "Admin" },
-];
 
 const LoginPage = () => {
 	const navigate = useNavigate();
@@ -60,12 +55,6 @@ const LoginPage = () => {
 					<div className="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
 						<div className="card rounded-4 mb-0 border-top border-4 border-primary border-gradient-1">
 							<div className="card-body p-5">
-								<img
-									src={logo}
-									className="mb-4"
-									width="145"
-									alt="logo"
-								/>
 								<h4 className="fw-bold">Get Started Now</h4>
 								<p className="mb-0">
 									Enter your credentials to log in
