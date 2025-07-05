@@ -6,28 +6,33 @@ export default [
 			{
 				title: "Overview",
 				icon: "arrow_right",
-				link: "dashboard",
+				link: "/dashboard",
 			},
 			{
 				title: "User",
 				icon: "arrow_right",
-				link: "user",
+				link: "/user",
 			},
 			{
 				title: "Beneficiaries",
 				icon: "arrow_right",
-				link: "beneficiaries",
+				link: "/beneficiaries",
 			},
 			{
 				title: "Device management",
 				icon: "arrow_right",
-				link: "device-management"
+				link: "/device-management"
 			},
 			{
 				title: "User management",
 				icon: "arrow_right",
-				link: "users",
+				link: "/users",
 			},
+			{
+				title: "Apps",
+				icon: "arrow_right",
+				link: "/apps"
+			}
 		],
 	},
 	{

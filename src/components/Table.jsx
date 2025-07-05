@@ -31,13 +31,18 @@ export const ManagementTable = ({
 	rowLink,
 	addButtonLabel = "Add",
 	tabs = [],
+	/**
+	 * Set to false to remove the Edit/Delete column and its header.
+	 * Useful for read‑only screens such as the Apps‑usage table.
+	 */
+	showActions = true,
 }) => {
 	/* ──────────────────────────── state */
 	const [search, setSearch] = useState("");
 	const [pageSize, setPageSize] = useState(10);
 	const [page, setPage] = useState(1);
 	const [selectedIds, setSelectedIds] = useState([]);
-	const [sort, setSort] = useState({ accessor: null, dir: null }); // dir: "asc" | "desc" | null
+	const [sort, setSort] = useState({ accessor: null, dir: null });
 
 	/* ──────────────────────────── derived */
 	const filtered = useMemo(() => {
@@ -111,7 +116,7 @@ export const ManagementTable = ({
 		});
 	};
 
-	/* ──────────────────────────── export helpers */
+	/* ──────────────────────────── export helpers  */
 	const buildExportRows = () => [
 		columns.map((c) => c.header),
 		...sorted.map((row) =>
@@ -231,7 +236,9 @@ export const ManagementTable = ({
 								</th>
 							);
 						})}
-						<th className="text-center">Actions</th>
+						{showActions && (
+							<th className="text-center">Actions</th>
+						)}
 					</tr>
 				</thead>
 				<tbody>
@@ -241,6 +248,7 @@ export const ManagementTable = ({
 							style={{ cursor: rowLink ? "pointer" : "default" }}
 							onClick={() => rowLink?.(row)}
 						>
+							{/* selection checkbox – keep stopPropagation so row click isn’t triggered */}
 							<td
 								className="text-center"
 								onClick={(e) => e.stopPropagation()}
@@ -252,39 +260,42 @@ export const ManagementTable = ({
 									onChange={() => toggleSelect(row.id)}
 								/>
 							</td>
+
+							{/* data cells – NO stopPropagation so the row click works */}
 							{columns.map((c) => (
-								<td
-									key={c.accessor}
-									onClick={(e) => e.stopPropagation()}
-								>
+								<td key={c.accessor}>
 									{c.render ? c.render(row) : row[c.accessor]}
 								</td>
 							))}
-							<td
-								className="text-center"
-								onClick={(e) => e.stopPropagation()}
-							>
-								<button
-									className="btn btn-sm btn-link me-2"
-									title="Edit"
-									onClick={() => onEdit?.(row)}
+
+							{showActions && (
+								<td
+									className="text-center"
+									onClick={(e) => e.stopPropagation()}
 								>
-									<FaEdit />
-								</button>
-								<button
-									className="btn btn-sm btn-link text-danger"
-									title="Delete"
-									onClick={() => handleDelete(row.id)}
-								>
-									<FaTrash />
-								</button>
-							</td>
+									<button
+										className="btn btn-sm btn-link me-2"
+										title="Edit"
+										onClick={() => onEdit?.(row)}
+									>
+										<FaEdit />
+									</button>
+									<button
+										className="btn btn-sm btn-link text-danger"
+										title="Delete"
+										onClick={() => handleDelete(row.id)}
+									>
+										<FaTrash />
+									</button>
+								</td>
+							)}
 						</tr>
 					))}
+
 					{paged.length === 0 && (
 						<tr>
 							<td
-								colSpan={columns.length + 2}
+								colSpan={columns.length + (showActions ? 2 : 1)}
 								className="text-center py-5 text-muted"
 							>
 								No records found.

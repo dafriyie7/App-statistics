@@ -16,6 +16,8 @@ import AddBeneficiary from "./pages/AddBeneficiary";
 import AddUser from "./pages/AddUser";
 import DeviceDetails from "./pages/DeviceDetails";
 import AddDevice from "./pages/AddDevice";
+import AppsUsage from "./pages/AppsUsage";
+import AppDetails from "./pages/AppDetails";
 
 function App() {
 	return (
@@ -64,6 +66,9 @@ function App() {
 					<Route path="devices/:id" element={<DeviceDetails />} />
 					<Route path="devices/new" element={<AddDevice />} />
 					<Route path="devices/new" element={<AddDevice />} />
+					<Route path="apps" element={<AppsUsage />} />
+					<Route path="app" element={<AppDetails />} />
+					<Route path="apps/:id" element={<AppDetails />} />
 				</Route>
 			</Routes>
 		</Router>
