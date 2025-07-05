@@ -16,7 +16,7 @@ import "../sass/responsive.css";
 import "../light-fix.css";
 
 /* data */
-import sidemenuData from "./sidemenuData";
+import sidemenuData from "./data/sidemenuData";
 
 const Content = () => {
 	const renderMenuItems = (menu) => {

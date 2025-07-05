@@ -1,7 +1,7 @@
 // AppUsage.jsx (or anywhere you want the chart list)
 import React from "react";
 import AppsHourlyChart from "../components/AppsHourlyChart";
-import appsUsage from "../components/apps"
+import appsUsage from "../components/data/apps";
 
 const AppDetails = () => (
 	<div className="container py-4">

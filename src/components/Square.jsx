@@ -11,8 +11,8 @@ import Dropdown from "./Dropdown";
  * @param {Array} data            – rows: [{icon, name, category, value, trend}]
  */
 const UsageCard = ({
-	title = "App Usage",
-	totalLabel = "Total usage this month",
+	title = "",
+	totalLabel = "",
 	total = 0,
 	totalTrend = 0,
 	unit = "hrs",

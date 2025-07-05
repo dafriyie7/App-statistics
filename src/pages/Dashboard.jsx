@@ -9,7 +9,7 @@ import Brect from "../components/Brect";
 import Dropdown from "../components/Dropdown";
 import MixedChart from "../components/Chartjs/MixedChart";
 import BarChart from "../components/Chartjs/BarChart";
-import data from "../components/usageData";
+import data from "../components/data/usageData";
 import { useState, useEffect } from "react";
 import EngagementCard from "../components/EngagementCard";
 
@@ -42,7 +42,8 @@ const Dashboard1j = () => {
 					/>
 
 					<SmallSquare
-						chart={<LineChart />}
+						chart={<LineChart
+						label/>}
 						title="Total Users"
 						figure="248k"
 						icon="groups"

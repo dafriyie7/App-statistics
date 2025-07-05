@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ThemeBtn from "../components/ThemeBtn";
-import users from "../components/logins"
+import users from "../components/data/logins"
 /** 🔑 TEMP – replace with fetch("/api/auth/login", …) later */
 
 const LoginPage = () => {

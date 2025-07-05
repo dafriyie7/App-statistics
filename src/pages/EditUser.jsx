@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import users from "../components/usersData"; // same dataset used in UserManagement
+import users from "../components/data/usersData"; // same dataset used in UserManagement
 
 /*********************************************************************
  * EditUser Page — mirrors EditBeneficiary but for system users      *

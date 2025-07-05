@@ -5,7 +5,7 @@
 import React, { useMemo } from "react";
 import BarChart from "./Chartjs/BarChart"; // ⬅️  your wrapper
 import { FaAndroid, FaApple, FaGithub } from "react-icons/fa"; // sample FA icons
-import appsUsage from "../components/apps"; // ⬅️  the dummy dataset we created
+import appsUsage from "./data/apps"; // ⬅️  the dummy dataset we created
 
 const hourLabels = Array.from(
 	{ length: 24 },

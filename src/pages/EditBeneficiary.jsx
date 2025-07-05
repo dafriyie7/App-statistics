@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import users from "../components/usersData"; // ← reuse same dataset
+import users from "../components/data/usersData"; // ← reuse same dataset
 
 /*********************************************************************
  * EditBeneficiary Page — loads actual beneficiary by ID             *

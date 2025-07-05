@@ -1,9 +1,9 @@
 
-import facebook from "../assets/images/apps/17.png";
-import twitter from "../assets/images/apps/twitter-circle.png";
-import instagram from "../assets/images/apps/19.png";
-import snapchat from "../assets/images/apps/20.png";
-import tiktok from "../assets/images/apps/03.png";
+import facebook from "../../assets/images/apps/17.png";
+import twitter from "../../assets/images/apps/twitter-circle.png";
+import instagram from "../../assets/images/apps/19.png";
+import snapchat from "../../assets/images/apps/20.png";
+import tiktok from "../../assets/images/apps/03.png";
 
 // This simulates what you might receive from an API.
 export default [

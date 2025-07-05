@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ManagementTable } from "../components/Table"; // adjust path as needed
-import users from "../components/usersData";
+import users from "../components/data/usersData";
 
 /*********************************************************************
  * BeneficiariesManagement                                           *
@@ -41,7 +41,6 @@ const BeneficiariesManagement = () => {
 				{getInitials(b.name)}
 			</div>
 		);
-	
 
 	const columns = [
 		{ header: "", accessor: "avatar", render: renderAvatar },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import devices from "../components/devicedata"; // ← actual dataset
+import devices from "../components/data/devicedata"; // ← actual dataset
 
 /*********************************************************************
  * EditDevice Page – loads real device by deviceId                   *

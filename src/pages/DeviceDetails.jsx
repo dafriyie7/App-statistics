@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import devices from "../components/devicedata"; // local dataset — replace with API fetch later
+import devices from "../components/data/devicedata"; // local dataset — replace with API fetch later
 
 /*********************************************************************
  * DeviceDetails Page                                               *

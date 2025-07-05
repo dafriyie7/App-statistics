@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ManagementTable } from "../components/Table";
-import device from "../components/devicedata";
+import device from "../components/data/devicedata";
 
 const DeviceManagement = () => {
 	const navigate = useNavigate();
