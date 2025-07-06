@@ -62,8 +62,8 @@ const Dashboard1j = () => {
 
 					<SmallSquare
 						chart={<MixedChart />}
-						title="Total Apps Tracked"
-						figure="143"
+						title="Daiily Usage"
+						figure=""
 						icon="apps"
 					/>
 
@@ -89,7 +89,7 @@ const Dashboard1j = () => {
 							/>
 						}
 						title="Total Time Tracked"
-						figure="2,354 hrs"
+						figure="125 hrs"
 						icon="timer"
 					/>
 				</div>

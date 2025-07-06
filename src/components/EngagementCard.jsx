@@ -54,8 +54,8 @@ const EngagementCard = () => {
 							{/* Pie Chart */}
 							<div className="position-relative">
 								<div className="piechart-legend">
-									<h2 className="mb-1">68%</h2>
-									<h6 className="mb-0">Active Usage</h6>
+									<h2 className="mb-1">{/* 68% */}</h2>
+									<h6 className="mb-0">{/* Active Usage */}</h6>
 								</div>
 								<div style={{ height: "170px" }}>
 									<DonutChart />
