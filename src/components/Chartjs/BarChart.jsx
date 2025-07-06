@@ -5,8 +5,8 @@ import ChartDataLabels from "chartjs-plugin-datalabels"; // ← import plugin
 const BarChart = ({
 	chartId = "chart2",
 	labels = [],
-	dataSales = [],
-	dataVisits = [],
+	dataSet1 = [],
+	dataset2 = [],
 	label = "",
 }) => {
 	const chartRef = useRef(null);
@@ -47,8 +47,8 @@ const BarChart = ({
 			datasets: [
 				{
 					label: label,
-					data: dataSales.length
-						? dataSales
+					data: dataSet1.length
+						? dataSet1
 						: [10, 25, 18, 35, 20, 38, 23, 26, 15, 32, 20, 13],
 					backgroundColor: gradient1,
 					borderColor: gradient1,
@@ -91,7 +91,7 @@ const BarChart = ({
 		}
 
 		chartInstance.current = new Chart(ctx, config);
-	}, [labels, dataSales, dataVisits, label]);
+	}, [labels, dataSet1, dataset2, label]);
 
 	return <canvas id={chartId} ref={chartRef}></canvas>;
 };

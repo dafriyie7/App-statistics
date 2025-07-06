@@ -1,4 +1,5 @@
 import PieChart from "../components/Chartjs/PieChart"; // Assuming this stays the same
+import DonutChart from "./Chartjs/DoughtnutChart";
 import Rect2 from "./Rect2";
 
 const EngagementCard = () => {
@@ -57,7 +58,7 @@ const EngagementCard = () => {
 									<h6 className="mb-0">Active Usage</h6>
 								</div>
 								<div style={{ height: "170px" }}>
-									<PieChart />
+									<DonutChart />
 								</div>
 							</div>
 

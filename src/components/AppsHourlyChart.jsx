@@ -41,8 +41,8 @@ const AppsHourlyChart = ({ appId }) => {
 				<BarChart
 					chartId={`hourly-${app.id}`}
 					labels={hourLabels}
-					dataSales={app.hourlyUsage} /* array of 24 numbers */
-					dataVisits={[]} /* hide 2nd dataset */
+					dataSet1={app.hourlyUsage} /* array of 24 numbers */
+					dataset2={[]} /* hide 2nd dataset */
 					label={"Minutes/ per hour"}
 				/>
 			</div>
