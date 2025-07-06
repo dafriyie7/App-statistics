@@ -42,7 +42,19 @@ const Dashboard1j = () => {
 					/>
 
 					<SmallSquare
-						chart={<LineChart />}
+						chart={
+							<LineChart
+								labels={[
+									"sun",
+									"Mon",
+									"Tue",
+									"Wed",
+									"Thur",
+									"Frid",
+									"Sat",
+								]}
+							/>
+						}
 						title="Total Usage Today"
 						figure="7hrs"
 						icon="schedule"
@@ -63,7 +75,19 @@ const Dashboard1j = () => {
 					/>
 
 					<SmallSquare
-						chart={<BarChart />}
+						chart={
+							<BarChart
+								labels={[
+									"sun",
+									"Mon",
+									"Tue",
+									"Wed",
+									"Thur",
+									"Frid",
+									"Sat",
+								]}
+							/>
+						}
 						title="Total Time Tracked"
 						figure="2,354 hrs"
 						icon="timer"
