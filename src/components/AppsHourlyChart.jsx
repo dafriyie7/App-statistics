@@ -43,6 +43,7 @@ const AppsHourlyChart = ({ appId }) => {
 					labels={hourLabels}
 					dataSales={app.hourlyUsage} /* array of 24 numbers */
 					dataVisits={[]} /* hide 2nd dataset */
+					label={"Minutes/ per hour"}
 				/>
 			</div>
 		</div>

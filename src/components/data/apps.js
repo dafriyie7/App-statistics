@@ -25,8 +25,6 @@ export default [
 			2, 0, 0, 0, 0, 3, 5, 10, 12, 8, 6, 4, 5, 7, 9, 11, 13, 15, 16, 10,
 			6, 4, 3, 1,
 		],
-		/* minutes used per day for the last 7 days (oldest → newest) */
-		dailyUsage: [90, 105, 110, 120, 130, 135, 150],
 	},
 	{
 		id: 2,

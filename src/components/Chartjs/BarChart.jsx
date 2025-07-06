@@ -1,17 +1,22 @@
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels"; // ← import plugin
 
 const BarChart = ({
 	chartId = "chart2",
 	labels = [],
 	dataSales = [],
 	dataVisits = [],
+	label = "",
 }) => {
 	const chartRef = useRef(null);
 	const chartInstance = useRef(null);
 
 	useEffect(() => {
 		const ctx = chartRef.current.getContext("2d");
+
+		// Register the plugin
+		Chart.register(ChartDataLabels);
 
 		// Gradients
 		const gradient1 = ctx.createLinearGradient(0, 0, 0, 300);
@@ -41,7 +46,7 @@ const BarChart = ({
 				  ],
 			datasets: [
 				{
-					label: "Sales",
+					label: label,
 					data: dataSales.length
 						? dataSales
 						: [10, 25, 18, 35, 20, 38, 23, 26, 15, 32, 20, 13],
@@ -50,21 +55,6 @@ const BarChart = ({
 					borderWidth: 0,
 					tension: 0.4,
 				},
-				{
-					label: "Visits",
-					data: dataVisits.length
-						? dataVisits
-						: [15, 30, 22, 55, 14, 35, 20, 35, 20, 15, 18, 5],
-					backgroundColor: gradient2,
-					borderColor: gradient2,
-					borderWidth: 0,
-					tension: 0.4,
-					fill: {
-						target: "origin",
-						above: "rgb(238 9 121 / 5%)",
-						below: "rgb(238 9 121 / 5%)",
-					},
-				},
 			],
 		};
 
@@ -72,16 +62,27 @@ const BarChart = ({
 			type: "bar",
 			data: chartData,
 			options: {
-				borderRadius: 30,
-				categoryPercentage: 0.3,
+				borderRadius: 0,
+				categoryPercentage: 0.5,
 				maintainAspectRatio: false,
 				plugins: {
 					legend: {
 						display: true,
 						position: "bottom",
 					},
+					datalabels: {
+						anchor: "end",
+						align: "end",
+						color: "#999",
+						font: {
+							weight: "bold",
+							size: 12,
+						},
+						formatter: (value) => `${value} min`,
+					},
 				},
 			},
+			plugins: [ChartDataLabels], // ← activate the plugin
 		};
 
 		// Destroy existing chart if already rendered
@@ -90,13 +91,9 @@ const BarChart = ({
 		}
 
 		chartInstance.current = new Chart(ctx, config);
-	}, [labels, dataSales, dataVisits]);
+	}, [labels, dataSales, dataVisits, label]);
 
-	return (
-		<>
-			<canvas id={chartId} ref={chartRef}></canvas>
-		</>
-	);
+	return <canvas id={chartId} ref={chartRef}></canvas>;
 };
 
 export default BarChart;
