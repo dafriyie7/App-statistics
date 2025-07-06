@@ -42,10 +42,10 @@ const Dashboard1j = () => {
 					/>
 
 					<SmallSquare
-						chart={<LineChart/>}
-						title="Total Users"
-						figure="248k"
-						icon="groups"
+						chart={<LineChart />}
+						title="Total Usage Today"
+						figure="7hrs"
+						icon="schedule"
 					/>
 
 					<SmallSquare

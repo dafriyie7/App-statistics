@@ -37,18 +37,13 @@ const LineChart = ({
 
 		/* ── data ── */
 		const defaultMonths = [
-			"Jan",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Aug",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dec",
+			"Sun",
+			"Mon",
+			"Tue",
+			"Wed",
+			"Thur",
+			"Fri",
+			"Sat"
 		];
 
 		const chartData = {
