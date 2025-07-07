@@ -20,11 +20,13 @@ export default [
 		launches: 14,
 		dataUsed: "120MB",
 		lastUsed: "2025-07-04 18:30",
-	    /* minutes used during each hour of the day (index 0 = 00:00‑01:00) */
 		hourlyUsage: [
 			2, 0, 0, 0, 0, 3, 5, 10, 12, 8, 6, 4, 5, 7, 9, 11, 13, 15, 16, 10,
 			6, 4, 3, 1,
 		],
+		dailyUsage: [30, 35, 45, 40, 50, 60, 65], // new
+		weeklyUsageMinutes: 325,
+		weeklyScreenTime: "5h 25m",
 	},
 	{
 		id: 2,
@@ -40,6 +42,8 @@ export default [
 			2, 1,
 		],
 		dailyUsage: [40, 55, 60, 75, 80, 90, 100],
+		weeklyUsageMinutes: 500,
+		weeklyScreenTime: "8h 20m",
 	},
 	{
 		id: 3,
@@ -55,6 +59,8 @@ export default [
 			18, 12, 8, 4, 2,
 		],
 		dailyUsage: [60, 70, 85, 95, 110, 125, 145],
+		weeklyUsageMinutes: 690,
+		weeklyScreenTime: "11h 30m",
 	},
 	{
 		id: 4,
@@ -70,6 +76,8 @@ export default [
 			0,
 		],
 		dailyUsage: [25, 30, 35, 40, 45, 50, 55],
+		weeklyUsageMinutes: 280,
+		weeklyScreenTime: "4h 40m",
 	},
 	{
 		id: 5,
@@ -85,6 +93,8 @@ export default [
 			0, 0,
 		],
 		dailyUsage: [5, 10, 15, 0, 30, 20, 0],
+		weeklyUsageMinutes: 80,
+		weeklyScreenTime: "1h 20m",
 	},
 	{
 		id: 6,
@@ -100,6 +110,8 @@ export default [
 			2, 1,
 		],
 		dailyUsage: [45, 50, 55, 60, 70, 80, 90],
+		weeklyUsageMinutes: 450,
+		weeklyScreenTime: "7h 30m",
 	},
 	{
 		id: 7,
@@ -115,6 +127,8 @@ export default [
 			0,
 		],
 		dailyUsage: [15, 18, 20, 22, 25, 28, 30],
+		weeklyUsageMinutes: 158,
+		weeklyScreenTime: "2h 38m",
 	},
 	{
 		id: 8,
@@ -130,5 +144,8 @@ export default [
 			0,
 		],
 		dailyUsage: [8, 10, 12, 15, 18, 12, 10],
+		weeklyUsageMinutes: 85,
+		weeklyScreenTime: "1h 25m",
 	},
 ];
+  

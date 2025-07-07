@@ -1,4 +1,3 @@
-// DonutChart.jsx
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
@@ -8,6 +7,8 @@ const DonutChart = ({
 	labels = [],
 	dataSales = [],
 	label = "Usage",
+	hideLegend = false,
+	hideDataLabels = false,
 }) => {
 	const chartRef = useRef(null);
 	const chartInstance = useRef(null);
@@ -16,7 +17,6 @@ const DonutChart = ({
 		const ctx = chartRef.current.getContext("2d");
 		Chart.register(ChartDataLabels);
 
-		/* palette (12 colours) */
 		const sliceColours = [
 			"#005bea",
 			"#00c6fb",
@@ -32,7 +32,6 @@ const DonutChart = ({
 			"#f8cdda",
 		];
 
-		/* fallbacks */
 		const defaultLabels = [
 			"Jan",
 			"Feb",
@@ -49,48 +48,55 @@ const DonutChart = ({
 		];
 		const defaultData = [10, 25, 18, 35, 20, 38, 23, 26, 15, 32, 20, 13];
 
-		/* data */
+		const activeData = dataSales.length ? dataSales : defaultData;
+
 		const chartData = {
 			labels: labels.length ? labels : defaultLabels,
 			datasets: [
 				{
 					label,
-					data: dataSales.length ? dataSales : defaultData,
-					backgroundColor: sliceColours.slice(
-						0,
-						dataSales.length || defaultData.length
-					),
-					borderWidth: 0, // ← no borders
+					data: activeData,
+					backgroundColor: sliceColours.slice(0, activeData.length),
+					borderWidth: 0,
 				},
 			],
 		};
 
-		/* config */
 		const config = {
 			type: "doughnut",
 			data: chartData,
 			options: {
 				maintainAspectRatio: false,
-				cutout: "80%", // ← slimmer ring
+				cutout: "80%",
 				plugins: {
-					legend: { display: true, position: "bottom" },
+					legend: {
+						display: !hideLegend,
+						position: "bottom",
+					},
 					datalabels: {
+						display: !hideDataLabels,
 						color: "#333",
 						font: { weight: "bold", size: 12 },
-						anchor: "end", // stick outside
+						anchor: "end",
 						align: "end",
-						offset: 8, // little gap from edge
-						formatter: (v) => `${v} min`,
+						offset: 8,
+						formatter: (v, ctx) => {
+							const total =
+								ctx.chart.data.datasets[0].data.reduce(
+									(a, b) => a + b,
+									0
+								);
+							return `${((v / total) * 100).toFixed(1)}%`;
+						},
 					},
 				},
 			},
 			plugins: [ChartDataLabels],
 		};
 
-		/* (re)draw */
 		if (chartInstance.current) chartInstance.current.destroy();
 		chartInstance.current = new Chart(ctx, config);
-	}, [labels, dataSales, label]);
+	}, [labels, dataSales, label, hideLegend, hideDataLabels]);
 
 	return <canvas id={chartId} ref={chartRef}></canvas>;
 };

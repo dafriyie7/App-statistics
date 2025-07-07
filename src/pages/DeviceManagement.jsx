@@ -11,14 +11,14 @@ const DeviceManagement = () => {
 		{
 			header: "Device ID",
 			accessor: "deviceId",
-			render: (d) => (
-				<Link
-					to={`/devices/${d.deviceId}`}
-					className="text-decoration-none"
-				>
-					{d.deviceId}
-				</Link>
-			),
+			// render: (d) => (
+			// 	<Link
+			// 		to={`/devices/${d.deviceId}`}
+			// 		className="text-decoration-none"
+			// 	>
+			// 		{d.deviceId}
+			// 	</Link>
+			// ),
 		},
 		{ header: "Model", accessor: "model" },
 		{ header: "Org.", accessor: "organisation" },
@@ -49,7 +49,8 @@ const DeviceManagement = () => {
 			onEdit={editDevice}
 			onDelete={(row) => deleteDevice(row.deviceId)}
 			onBulkDelete={bulkDelete}
-			/* rowLink not needed because we link inside the first cell */
+			/* row click → /apps/<id> */
+			rowLink={(row) => navigate(`/devices/${row.deviceId}`)}
 		/>
 	);
 };

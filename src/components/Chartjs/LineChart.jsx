@@ -1,115 +1,109 @@
-// LineChart.jsx  – line + area blend with data‑labels
+// LineChart.jsx
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const LineChart = ({
-	chartId = "chart2",
+	chartId = "chart-line",
 	labels = [],
-	dataSales = [],
-	dataVisits = [],
-	label = "Usage",
+	dataSet1 = [],
+	label = "",
+	hideLegend = false,
+	hideDataLabels = false,
+	hideXAxis = false,
+	hideYAxis = false,
 }) => {
+	const canvasRef = useRef(null);
 	const chartRef = useRef(null);
-	const chartInstance = useRef(null);
 
 	useEffect(() => {
-		const ctx = chartRef.current.getContext("2d");
-		Chart.register(ChartDataLabels); // register once
+		const ctx = canvasRef.current.getContext("2d");
+		Chart.register(ChartDataLabels);
 
-		/* ── gradients for stroke ── */
-		const stroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-		stroke1.addColorStop(0, "#005bea");
-		stroke1.addColorStop(1, "#00c6fb");
+		// ───── Generate hue and build color helpers ─────
+		const hue = Math.floor(Math.random() * 360);
+		const lineColor = `hsl(${hue}, 80%, 50%)`;
 
-		const stroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-		stroke2.addColorStop(0, "#ff6a00");
-		stroke2.addColorStop(1, "#ee0979");
+		// ───── Gradient from top to bottom of canvas ─────
+		const height = ctx.canvas.clientHeight || 300;
+		const gradient = ctx.createLinearGradient(0, 0, 0, height);
+		gradient.addColorStop(0, `hsla(${hue}, 80%, 55%, 0.6)`); // top
+		gradient.addColorStop(1, `hsla(${hue}, 80%, 55%, 0.05)`); // bottom
 
-		/* ── gradients for area fill ── */
-		const fill1 = ctx.createLinearGradient(0, 0, 0, 300);
-		fill1.addColorStop(0, "rgba(0, 91, 234, 0.25)"); // top 25 % opacity
-		fill1.addColorStop(1, "rgba(0, 198, 251, 0.05)"); // fade to 5 %
-
-		const fill2 = ctx.createLinearGradient(0, 0, 0, 300);
-		fill2.addColorStop(0, "rgba(255, 106, 0, 0.25)");
-		fill2.addColorStop(1, "rgba(238, 9, 121, 0.05)");
-
-		/* ── data ── */
-		const defaultMonths = [
-			"Sun",
-			"Mon",
-			"Tue",
-			"Wed",
-			"Thur",
-			"Fri",
-			"Sat"
-		];
-
+		// ───── Chart data ─────
 		const chartData = {
-			labels: labels.length ? labels : defaultMonths,
+			labels: labels.length
+				? labels
+				: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 			datasets: [
 				{
 					label,
-					data: dataSales.length
-						? dataSales
-						: [10, 25, 18, 35, 20, 38, 23, 26, 15, 32, 20, 13],
-					borderColor: stroke1,
-					backgroundColor: fill1,
-					borderWidth: 2,
-					tension: 0.35,
-					fill: { target: "origin" }, // ← area under line
-					pointRadius: 4,
-					pointHoverRadius: 6,
+					data: dataSet1.length
+						? dataSet1
+						: [15, 25, 18, 32, 28, 30, 22],
+					borderColor: lineColor,
+					backgroundColor: gradient,
+					tension: 0.4,
+					pointRadius: 3,
+					pointHoverRadius: 5,
+					fill: { target: "origin" },
 				},
-				...(dataVisits.length
-					? [
-							{
-								label: "Visits",
-								data: dataVisits,
-								borderColor: stroke2,
-								backgroundColor: fill2,
-								borderWidth: 2,
-								tension: 0.35,
-								fill: { target: "origin" },
-								pointRadius: 4,
-								pointHoverRadius: 6,
-							},
-					  ]
-					: []),
 			],
 		};
 
-		/* ── config ── */
+		// ───── Chart config ─────
 		const config = {
 			type: "line",
 			data: chartData,
+			plugins: [ChartDataLabels],
 			options: {
 				maintainAspectRatio: false,
 				plugins: {
-					legend: { display: true, position: "bottom" },
+					legend: { display: !hideLegend, position: "bottom" },
 					datalabels: {
-						anchor: "end",
+						display: !hideDataLabels,
 						align: "top",
-						color: "#ffffff", // bright text
-						font: { weight: "bold", size: 12 },
-						formatter: (v) => `${v} min`,
+						anchor: "end",
+						color: "#666",
+						font: { weight: "bold", size: 11 },
+						formatter: (v) => `${v} min`,
 					},
 				},
 				scales: {
-					y: { beginAtZero: true, grid: { drawBorder: false } },
-					x: { grid: { display: false } },
+					x: {
+						display: !hideXAxis,
+						grid: { display: !hideXAxis },
+						ticks: { display: !hideXAxis },
+					},
+					y: {
+						display: !hideYAxis,
+						grid: { display: !hideYAxis },
+						ticks: { display: !hideYAxis },
+					},
 				},
 			},
-			plugins: [ChartDataLabels],
 		};
 
-		/* ── (re)draw ── */
-		if (chartInstance.current) chartInstance.current.destroy();
-		chartInstance.current = new Chart(ctx, config);
-	}, [labels, dataSales, dataVisits, label]);
+		// ───── Destroy previous & render new ─────
+		if (chartRef.current) chartRef.current.destroy();
+		chartRef.current = new Chart(ctx, config);
+	}, [
+		labels,
+		dataSet1,
+		label,
+		hideLegend,
+		hideDataLabels,
+		hideXAxis,
+		hideYAxis,
+	]);
 
-	return <canvas id={chartId} ref={chartRef}></canvas>;
+	return (
+		<canvas
+			id={chartId}
+			ref={canvasRef}
+			style={{ width: "100%", height: "100%" }}
+		></canvas>
+	);
 };
 
 export default LineChart;

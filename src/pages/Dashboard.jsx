@@ -12,6 +12,7 @@ import BarChart from "../components/Chartjs/BarChart";
 import data from "../components/data/usageData";
 import { useState, useEffect } from "react";
 import EngagementCard from "../components/EngagementCard";
+import { Line } from "react-chartjs-2";
 
 const Dashboard1j = () => {
 	const [usage, setUsage] = useState([]);
@@ -53,6 +54,10 @@ const Dashboard1j = () => {
 									"Frid",
 									"Sat",
 								]}
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
 							/>
 						}
 						title="Total Usage Today"
@@ -60,15 +65,42 @@ const Dashboard1j = () => {
 						icon="schedule"
 					/>
 
-					<SmallSquare
-						chart={<MixedChart />}
+					{/* <SmallSquare
+						chart={
+							<LineChart
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
 						title="Daiily Usage"
 						figure=""
 						icon="apps"
-					/>
+					/> */}
 
 					<SmallSquare
-						chart={<BarChart2 />}
+						chart={
+							<LineChart
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
+						title="Daily Usage"
+						figure="5hrs"
+						icon="apps"
+					/>
+					<SmallSquare
+						chart={
+							<LineChart
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
 						title="Total Active Sessions"
 						figure="38.9k"
 						icon="bolt"
@@ -86,6 +118,10 @@ const Dashboard1j = () => {
 									"Frid",
 									"Sat",
 								]}
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
 							/>
 						}
 						title="Total Time Tracked"

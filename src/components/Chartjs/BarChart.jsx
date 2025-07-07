@@ -1,32 +1,34 @@
+// BarChart.jsx
 import React, { useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
-import ChartDataLabels from "chartjs-plugin-datalabels"; // ← import plugin
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 const BarChart = ({
+	/* ---------- data & identity ---------- */
 	chartId = "chart2",
 	labels = [],
 	dataSet1 = [],
-	dataset2 = [],
 	label = "",
+	/* ---------- hide controls ------------ */
+	hideLegend = false,
+	hideDataLabels = false,
+	hideXAxis = false,
+	hideYAxis = false,
 }) => {
+	const canvasRef = useRef(null);
 	const chartRef = useRef(null);
-	const chartInstance = useRef(null);
 
 	useEffect(() => {
-		const ctx = chartRef.current.getContext("2d");
-
-		// Register the plugin
+		/* ------- context & plugin reg ------- */
+		const ctx = canvasRef.current.getContext("2d");
 		Chart.register(ChartDataLabels);
 
-		// Gradients
-		const gradient1 = ctx.createLinearGradient(0, 0, 0, 300);
-		gradient1.addColorStop(0, "#005bea");
-		gradient1.addColorStop(1, "#00c6fb");
+		/* ------- colours / gradients -------- */
+		const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+		gradient.addColorStop(0, "#005bea");
+		gradient.addColorStop(1, "#00c6fb");
 
-		const gradient2 = ctx.createLinearGradient(0, 0, 0, 300);
-		gradient2.addColorStop(0, "#ff6a00");
-		gradient2.addColorStop(1, "#ee0979");
-
+		/* ------------- data ----------------- */
 		const chartData = {
 			labels: labels.length
 				? labels
@@ -46,54 +48,66 @@ const BarChart = ({
 				  ],
 			datasets: [
 				{
-					label: label,
+					label,
 					data: dataSet1.length
 						? dataSet1
 						: [10, 25, 18, 35, 20, 38, 23, 26, 15, 32, 20, 13],
-					backgroundColor: gradient1,
-					borderColor: gradient1,
+					backgroundColor: gradient,
+					borderColor: gradient,
 					borderWidth: 0,
-					tension: 0.4,
 				},
 			],
 		};
 
+		/* ------------- config --------------- */
 		const config = {
 			type: "bar",
 			data: chartData,
+			plugins: [ChartDataLabels],
 			options: {
-				borderRadius: 0,
-				categoryPercentage: 0.5,
 				maintainAspectRatio: false,
+				categoryPercentage: 0.5,
+				borderRadius: 0,
 				plugins: {
-					legend: {
-						display: true,
-						position: "bottom",
-					},
+					legend: { display: !hideLegend, position: "bottom" },
 					datalabels: {
+						display: !hideDataLabels,
 						anchor: "end",
 						align: "end",
 						color: "#999",
-						font: {
-							weight: "bold",
-							size: 12,
-						},
-						formatter: (value) => `${value} min`,
+						font: { weight: "bold", size: 12 },
+						formatter: (v) => `${v} min`,
+					},
+				},
+				scales: {
+					x: {
+						display: !hideXAxis,
+						grid: { display: !hideXAxis },
+						ticks: { display: !hideXAxis },
+					},
+					y: {
+						display: !hideYAxis,
+						grid: { display: !hideYAxis },
+						ticks: { display: !hideYAxis },
 					},
 				},
 			},
-			plugins: [ChartDataLabels], // ← activate the plugin
 		};
 
-		// Destroy existing chart if already rendered
-		if (chartInstance.current) {
-			chartInstance.current.destroy();
-		}
+		/* ------- destroy & render ----------- */
+		if (chartRef.current) chartRef.current.destroy();
+		chartRef.current = new Chart(ctx, config);
+	}, [
+		labels,
+		dataSet1,
+		label,
+		hideLegend,
+		hideDataLabels,
+		hideXAxis,
+		hideYAxis,
+	]);
 
-		chartInstance.current = new Chart(ctx, config);
-	}, [labels, dataSet1, dataset2, label]);
-
-	return <canvas id={chartId} ref={chartRef}></canvas>;
+	return <canvas id={chartId} ref={canvasRef}></canvas>;
 };
 
 export default BarChart;

@@ -23,7 +23,7 @@ const SmallSquare = (props) => {
 					<div>
                         <h4 className="mb-0">{props.figure}</h4>
                         <p className="mb-3">{ props.title }</p>
-                        <div style={{ height: "160px" }}>
+                        <div style={{ height: "90px" }}>
                             {props.chart}
                         </div>
 					</div>

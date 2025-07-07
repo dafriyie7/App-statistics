@@ -11,14 +11,6 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-/*******************************************************************************************
- * ManagementTable (Data‑Tables flavour)                                                   *
- * --------------------------------------------------------------------------------------- *
- *  • Dark‑themed table with search, paging, sorting, bulk‑select + per‑row actions         *
- *  • Export: Copy | Excel | PDF | Print                                                   *
- *  • Optional extra tabs via the `tabs` prop                                              *
- * --------------------------------------------------------------------------------------- */
-
 export const ManagementTable = ({
 	title,
 	data = [],
