@@ -1,8 +1,8 @@
 import Rect1 from "../components/Rect1";
 import SmallSquare from "../components/SmallSquare";
 import LineChart from "../components/Chartjs/LineChart";
-import BarChart2 from "../components/Chartjs/BarChart2"
-import PieChart from "../components/Chartjs/PieChart"
+import BarChart2 from "../components/Chartjs/BarChart2";
+import PieChart from "../components/Chartjs/PieChart";
 import Rect2 from "../components/Rect2";
 import Square from "../components/Square";
 import Brect from "../components/Brect";
@@ -12,6 +12,7 @@ import BarChart from "../components/Chartjs/BarChart";
 import data from "../components/data/usageData";
 import { useState, useEffect } from "react";
 import EngagementCard from "../components/EngagementCard";
+import { Line } from "react-chartjs-2";
 
 const Dashboard1j = () => {
 	const [usage, setUsage] = useState([]);
@@ -42,30 +43,89 @@ const Dashboard1j = () => {
 					/>
 
 					<SmallSquare
-						chart={<LineChart/>}
-						title="Total Users"
-						figure="248k"
-						icon="groups"
+						chart={
+							<LineChart
+								labels={[
+									"sun",
+									"Mon",
+									"Tue",
+									"Wed",
+									"Thur",
+									"Frid",
+									"Sat",
+								]}
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
+						title="Total Usage Today"
+						figure="7hrs"
+						icon="schedule"
 					/>
 
+					{/* <SmallSquare
+						chart={
+							<LineChart
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
+						title="Daiily Usage"
+						figure=""
+						icon="apps"
+					/> */}
+
 					<SmallSquare
-						chart={<MixedChart />}
-						title="Total Apps Tracked"
-						figure="143"
+						chart={
+							<LineChart
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
+						title="Daily Usage"
+						figure="5hrs"
 						icon="apps"
 					/>
-
 					<SmallSquare
-						chart={<BarChart2 />}
+						chart={
+							<LineChart
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
 						title="Total Active Sessions"
 						figure="38.9k"
 						icon="bolt"
 					/>
 
 					<SmallSquare
-						chart={<BarChart />}
+						chart={
+							<BarChart
+								labels={[
+									"sun",
+									"Mon",
+									"Tue",
+									"Wed",
+									"Thur",
+									"Frid",
+									"Sat",
+								]}
+								hideLegend
+								hideDataLabels
+								hideXAxis
+								hideYAxis
+							/>
+						}
 						title="Total Time Tracked"
-						figure="2,354 hrs"
+						figure="125 hrs"
 						icon="timer"
 					/>
 				</div>

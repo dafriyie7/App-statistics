@@ -1,74 +1,48 @@
+// Drect.jsx
 import React from "react";
 
-const Drect = () => {
+const Drect = ({ data }) => {
+	const order = ["daily", "weekly", "monthly"];
+
 	return (
 		<div className="d-flex flex-column flex-lg-row align-items-start justify-content-around border p-3 rounded-4 mt-3 gap-3">
-			{/* Daily Usage */}
-			<div className="d-flex align-items-center gap-4">
-				<div>
-					<p className="mb-0 data-attributes">
-						<span data-peity='{ "fill": ["#2196f3", "rgb(255 255 255 / 12%)"], "innerRadius": 32, "radius": 40 }'>
-							5/8
-						</span>
-					</p>
-				</div>
-				<div>
-					<p className="mb-1 fs-6 fw-bold">Daily Usage</p>
-					<h2 className="mb-0">10.5 hrs</h2>
-					<p className="mb-0">
-						<span className="text-success me-2 fw-medium">
-							+8.2%
-						</span>
-						<span>vs yesterday</span>
-					</p>
-				</div>
-			</div>
+			{order.map((period, idx) => {
+				const block = data?.[period];
+				if (!block) return null;
 
-			<div className="vr"></div>
+				const positive = !block.growth?.startsWith("-");
+				const badgeCls = positive ? "text-success" : "text-danger";
 
-			{/* Weekly Usage */}
-			<div className="d-flex align-items-center gap-4">
-				<div>
-					<p className="mb-0 data-attributes">
-						<span data-peity='{ "fill": ["#ffd200", "rgb(255 255 255 / 12%)"], "innerRadius": 32, "radius": 40 }'>
-							6/7
-						</span>
-					</p>
-				</div>
-				<div>
-					<p className="mb-1 fs-6 fw-bold">Weekly Usage</p>
-					<h2 className="mb-0">72 hrs</h2>
-					<p className="mb-0">
-						<span className="text-success me-2 fw-medium">
-							+14.1%
-						</span>
-						<span>vs last week</span>
-					</p>
-				</div>
-			</div>
+				return (
+					<React.Fragment key={period}>
+						<div className="d-flex align-items-center gap-4">
+							<div>
+								<p className="mb-0 data-attributes">
+									<span data-peity='{ "fill": ["#2196f3", "rgb(255 255 255 / 12%)"], "innerRadius": 32, "radius": 40 }'>
+										5/8
+									</span>
+								</p>
+							</div>
 
-			<div className="vr"></div>
-
-			{/* Monthly Usage */}
-			<div className="d-flex align-items-center gap-4">
-				<div>
-					<p className="mb-0 data-attributes">
-						<span data-peity='{ "fill": ["#4caf50", "rgb(255 255 255 / 12%)"], "innerRadius": 32, "radius": 40 }'>
-							25/30
-						</span>
-					</p>
-				</div>
-				<div>
-					<p className="mb-1 fs-6 fw-bold">Monthly Usage</p>
-					<h2 className="mb-0">312 hrs</h2>
-					<p className="mb-0">
-						<span className="text-success me-2 fw-medium">
-							+19.5%
-						</span>
-						<span>vs last month</span>
-					</p>
-				</div>
-			</div>
+							<div>
+								<p className="mb-1 fs-6 fw-bold">
+									{block.label}
+								</p>
+								<h2 className="mb-0">{block.value}</h2>
+								<p className="mb-0">
+									<span
+										className={`${badgeCls} me-2 fw-medium`}
+									>
+										{block.growth}
+									</span>
+									<span>{block.subLabel}</span>
+								</p>
+							</div>
+						</div>
+						{idx !== order.length - 1 && <div className="vr"></div>}
+					</React.Fragment>
+				);
+			})}
 		</div>
 	);
 };

@@ -101,4 +101,4 @@ const DonutChart = ({
 	return <canvas id={chartId} ref={chartRef}></canvas>;
 };
 
-export default DonutChart;
+export default DonutChart
