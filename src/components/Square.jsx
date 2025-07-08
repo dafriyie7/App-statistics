@@ -1,16 +1,17 @@
+// components/Square.jsx
 import React from "react";
 import Dropdown from "./Dropdown";
 
 /**
- * UsageCard
- * @param {string} title          – card heading
- * @param {string} totalLabel     – text under the big figure
- * @param {string|number} total   – main figure (e.g. 654)
- * @param {number} totalTrend     – % change for the main figure
- * @param {string} unit           – unit for per‑row value (e.g. "hrs", "sessions")
- * @param {Array} data            – rows: [{icon, name, category, value, trend}]
+ * Square card – purely presentational
+ * @prop {string}  title
+ * @prop {string}  totalLabel
+ * @prop {number}  total
+ * @prop {number}  totalTrend
+ * @prop {string}  unit
+ * @prop {Array}   data  [{icon,name,category,value,trend}]
  */
-const UsageCard = ({
+const Square = ({
 	title = "",
 	totalLabel = "",
 	total = 0,
@@ -46,11 +47,17 @@ const UsageCard = ({
 					<div className="mb-4">
 						<div className="d-flex align-items-center gap-3">
 							<h3 className="mb-0">
-								{total}&nbsp;{unit}
+								{total} {unit}
 							</h3>
-							<p className="mb-0 text-success d-flex align-items-center gap-1">
+							<p
+								className={`mb-0 ${
+									totalTrend >= 0
+										? "text-success"
+										: "text-danger"
+								} d-flex align-items-center gap-1`}
+							>
 								{totalTrend >= 0 ? "+" : ""}
-								{totalTrend}%
+								{totalTrend.toFixed(1)}%
 								<span className="material-icons-outlined fs-6">
 									{totalTrend >= 0
 										? "arrow_upward"
@@ -61,27 +68,35 @@ const UsageCard = ({
 						<p className="mb-0 font-13">{totalLabel}</p>
 					</div>
 
-					{/* Usage list */}
-					<div className="table-responsive">
+					{/* Scrollable table (max ≈ 5 rows) */}
+					<div
+						className="table-responsive"
+						style={{ maxHeight: "260px", overflowY: "auto" }}
+					>
 						<table className="table align-middle mb-0">
 							<tbody>
 								{data.map(
-									({
-										icon,
-										name,
-										category,
-										value,
-										trend,
-									}) => (
-										<tr key={name}>
-											{/* icon + name */}
+									(
+										{ icon, name, category, value, trend },
+										i
+									) => (
+										<tr key={i}>
 											<td className="border-0">
 												<div className="d-flex align-items-center gap-3">
-													<img
-														src={icon}
-														width="40"
-														alt={name}
-													/>
+													{typeof icon ===
+													"string" ? (
+														<img
+															src={icon}
+															width="32"
+															alt={name}
+														/>
+													) : (
+														/* icon is a react‑icon component */
+														React.createElement(
+															icon,
+															{ size: 28 }
+														)
+													)}
 													<div>
 														<h6 className="mb-0">
 															{name}
@@ -92,15 +107,11 @@ const UsageCard = ({
 													</div>
 												</div>
 											</td>
-
-											{/* value */}
 											<td className="border-0">
 												<h6 className="mb-0">
-													{value}&nbsp;{unit}
+													{value} {unit}
 												</h6>
 											</td>
-
-											{/* trend */}
 											<td className="border-0">
 												<TrendBadge value={trend} />
 											</td>
@@ -116,4 +127,4 @@ const UsageCard = ({
 	);
 };
 
-export default UsageCard;
+export default Square;

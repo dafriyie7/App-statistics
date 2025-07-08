@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import stats from "../components/data/stats"; // ← the JSON with daily/weekly/monthly slices
 import Drect from "../components/Drect";
 import BeneficiaryOverview from "./BeneficiaryOverview";
+import appUsageData from "../components/data/apps"
 
 /* helpers for sparkline labels */
 const hourLabels = Array.from({ length: 12 }, (_, i) =>
@@ -32,16 +33,15 @@ const Dashboard1j = () => {
 
 	const screen = stats.summaryStats.totalScreenTime;
 
-
 	/* pull the slice we need – here we graph totalScreenTime */
 	const slice = stats.summaryStats.totalScreenTime[range];
 	const data = slice.hours || slice.days || slice.weeks || [];
 	const labels = getLabels(range);
-	
-	 			const getGrowth = (value) => {
-	 				const num = parseFloat(value);
-	 				return `${num > 0 ? "+" : ""}${num.toFixed(1)}%`;
- 			};
+
+	const getGrowth = (value) => {
+		const num = parseFloat(value);
+		return `${num > 0 ? "+" : ""}${num.toFixed(1)}%`;
+	};
 
 	// pretend-fetch
 	useEffect(() => {
@@ -51,6 +51,81 @@ const Dashboard1j = () => {
 		}, 600); // simulate network latency
 		return () => clearTimeout(timer);
 	}, []);
+
+	/* ---------------------------------------------
+   DASHBOARD DATA PREP  (place right after imports)
+---------------------------------------------- */
+	const getTimeLabel = (r) =>
+		r === "daily" ? "today" : r === "weekly" ? "this week" : "this month";
+
+	/* convert '1.2GB' or '120MB' → MB */
+	const toMB = (str) => {
+		const n = parseFloat(str);
+		return str.toUpperCase().includes("GB") ? n * 1024 : n;
+	};
+
+	/* convert '2h 30m' → minutes (helper if needed) */
+	const timeToMin = (str) => {
+		const [h = "0h", m = "0m"] = str.split(" ");
+		return parseInt(h) * 60 + parseInt(m);
+	};
+
+	/* ===== create derived lists based on range ===== */
+	const multiplier = range === "daily" ? 1 : range === "weekly" ? 7 : 30;
+
+	const transformed = appUsageData.map((app) => ({
+		...app,
+		visits: app.launches * multiplier,
+		dataMB: toMB(app.dataUsed) * multiplier,
+		hrs: (
+			(app.weeklyUsageMinutes * (range === "monthly" ? 4 : 1)) /
+			60
+		).toFixed(1),
+	}));
+
+	/* Top 5 by screen‑time hrs */
+	const topUsage = [...transformed]
+		.sort((a, b) => b.hrs - a.hrs)
+		.slice(0, 5)
+		.map((a) => ({
+			icon: a.icon,
+			name: a.name,
+			category: a.category,
+			value: a.hrs,
+			trend: 0,
+		}));
+
+	/* Top 5 by data usage */
+	const topNetwork = [...transformed]
+		.sort((a, b) => b.dataMB - a.dataMB)
+		.slice(0, 5)
+		.map((a) => ({
+			icon: a.icon,
+			name: a.name,
+			category: a.category,
+			value: a.dataMB.toFixed(0),
+			trend: 0,
+		}));
+
+	/* Top 5 by visits */
+	const topVisits = [...transformed]
+		.sort((a, b) => b.visits - a.visits)
+		.slice(0, 5)
+		.map((a) => ({
+			icon: a.icon,
+			name: a.name,
+			category: a.category,
+			value: a.visits,
+			trend: 0,
+		}));
+
+	const totalUsageHrs = transformed
+		.reduce((acc, a) => acc + parseFloat(a.hrs), 0)
+		.toFixed(1);
+	const totalDataMB = transformed
+		.reduce((acc, a) => acc + a.dataMB, 0)
+		.toFixed(0);
+	const totalVisits = transformed.reduce((acc, a) => acc + a.visits, 0);
 
 	if (loading) return <p>Loading…</p>;
 
@@ -315,29 +390,32 @@ const Dashboard1j = () => {
 				<div className="row">
 					<Square
 						title="App Usage"
-						total={654}
-						totalTrend={15}
-						totalLabel="Total usage this month"
+						total={totalUsageHrs}
+						totalTrend={0}
+						totalLabel={`Total usage ${getTimeLabel(range)}`}
 						unit="hrs"
-						data={usage}
+						data={topUsage}
 					/>
+
 					<Square
 						title="Top 5 Network Consumption"
-						total={654}
-						totalTrend={15}
-						totalLabel="Total usage this month"
-						unit="hrs"
-						data={usage}
+						total={totalDataMB}
+						totalTrend={0}
+						totalLabel={`Total data used ${getTimeLabel(range)}`}
+						unit="MB"
+						data={topNetwork}
 					/>
+
 					<Square
 						title="Total Visits"
-						total={654}
-						totalTrend={15}
-						totalLabel="Total usage this month"
-						unit="hrs"
-						data={usage}
+						total={totalVisits}
+						totalTrend={0}
+						totalLabel={`App launches ${getTimeLabel(range)}`}
+						unit="sessions"
+						data={topVisits}
 					/>
 				</div>
+
 				{/* <!--end row 3--> */}
 
 				{/* Start row 4 */}

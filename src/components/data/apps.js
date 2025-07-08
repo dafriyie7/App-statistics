@@ -1,4 +1,3 @@
-// appsUsageData.js
 import {
 	FaWhatsapp,
 	FaFacebook,
@@ -18,13 +17,14 @@ export default [
 		category: "Messaging",
 		screenTime: "2h 30m",
 		launches: 14,
+		totalVisits: 14, // NEW
 		dataUsed: "120MB",
 		lastUsed: "2025-07-04 18:30",
 		hourlyUsage: [
 			2, 0, 0, 0, 0, 3, 5, 10, 12, 8, 6, 4, 5, 7, 9, 11, 13, 15, 16, 10,
 			6, 4, 3, 1,
 		],
-		dailyUsage: [30, 35, 45, 40, 50, 60, 65], // new
+		dailyUsage: [30, 35, 45, 40, 50, 60, 65],
 		weeklyUsageMinutes: 325,
 		weeklyScreenTime: "5h 25m",
 	},
@@ -35,6 +35,7 @@ export default [
 		category: "Social Media",
 		screenTime: "1h 45m",
 		launches: 8,
+		totalVisits: 8, // NEW
 		dataUsed: "250MB",
 		lastUsed: "2025-07-04 20:10",
 		hourlyUsage: [
@@ -52,6 +53,7 @@ export default [
 		category: "Entertainment",
 		screenTime: "3h 15m",
 		launches: 6,
+		totalVisits: 6, // NEW
 		dataUsed: "1.2GB",
 		lastUsed: "2025-07-04 22:00",
 		hourlyUsage: [
@@ -69,6 +71,7 @@ export default [
 		category: "Browser",
 		screenTime: "1h 10m",
 		launches: 11,
+		totalVisits: 11, // NEW
 		dataUsed: "600MB",
 		lastUsed: "2025-07-04 19:20",
 		hourlyUsage: [
@@ -86,6 +89,7 @@ export default [
 		category: "Communication",
 		screenTime: "45m",
 		launches: 2,
+		totalVisits: 2, // NEW
 		dataUsed: "400MB",
 		lastUsed: "2025-07-03 16:45",
 		hourlyUsage: [
@@ -103,6 +107,7 @@ export default [
 		category: "Social Media",
 		screenTime: "1h 20m",
 		launches: 5,
+		totalVisits: 5, // NEW
 		dataUsed: "300MB",
 		lastUsed: "2025-07-04 21:10",
 		hourlyUsage: [
@@ -120,6 +125,7 @@ export default [
 		category: "Productivity",
 		screenTime: "35m",
 		launches: 7,
+		totalVisits: 7, // NEW
 		dataUsed: "75MB",
 		lastUsed: "2025-07-04 15:00",
 		hourlyUsage: [
@@ -137,6 +143,7 @@ export default [
 		category: "Navigation",
 		screenTime: "20m",
 		launches: 3,
+		totalVisits: 3, // NEW
 		dataUsed: "50MB",
 		lastUsed: "2025-07-03 13:50",
 		hourlyUsage: [
@@ -148,4 +155,3 @@ export default [
 		weeklyScreenTime: "1h 25m",
 	},
 ];
-  
