@@ -86,7 +86,6 @@ const Dashboard1j = () => {
 	/* Top 5 by screen‑time hrs */
 	const topUsage = [...transformed]
 		.sort((a, b) => b.hrs - a.hrs)
-		.slice(0, 5)
 		.map((a) => ({
 			icon: a.icon,
 			name: a.name,
@@ -110,7 +109,6 @@ const Dashboard1j = () => {
 	/* Top 5 by visits */
 	const topVisits = [...transformed]
 		.sort((a, b) => b.visits - a.visits)
-		.slice(0, 5)
 		.map((a) => ({
 			icon: a.icon,
 			name: a.name,
@@ -273,7 +271,7 @@ const Dashboard1j = () => {
 									<div className="d-flex align-items-start justify-content-between">
 										<div className="">
 											<h5 className="mb-0">
-												Order Status
+												App Engagement
 											</h5>
 										</div>
 										<Dropdown />
