@@ -1,21 +1,12 @@
-import Rect1 from "../components/Rect1";
-import SmallSquare from "../components/SmallSquare";
+
 import LineChart from "../components/Chartjs/LineChart";
-import BarChart2 from "../components/Chartjs/BarChart2";
-import PieChart from "../components/Chartjs/PieChart";
-import Rect2 from "../components/Rect2";
 import Square from "../components/Square";
-import Brect from "../components/Brect";
 import Dropdown from "../components/Dropdown";
-import MixedChart from "../components/Chartjs/MixedChart";
 import BarChart from "../components/Chartjs/BarChart";
-// import data from "../components/data/usageData";
 import { useState, useEffect } from "react";
-import EngagementCard from "../components/EngagementCard";
-import { Line } from "react-chartjs-2";
 import stats from "../components/data/stats"; // ← the JSON with daily/weekly/monthly slices
-import DailyUsageChart from "../components/DailyUsageChart";
 import Drect from "../components/Drect";
+import BeneficiaryOverview from "./BeneficiaryOverview";
 
 /* helpers for sparkline labels */
 const hourLabels = Array.from({ length: 12 }, (_, i) =>
@@ -46,15 +37,6 @@ const Dashboard1j = () => {
 	const slice = stats.summaryStats.totalScreenTime[range];
 	const data = slice.hours || slice.days || slice.weeks || [];
 	const labels = getLabels(range);
-	// const trend = stats.summaryStats.totalScreenTime.trend;
-
-	/* text helpers for Drect */
-	// const niceRange =
-	// 	range === "daily"
-	// 		? "today"
-	// 		: range === "weekly"
-	// 		? "this week"
-	// 			: "this month";
 	
 	 			const getGrowth = (value) => {
 	 				const num = parseFloat(value);
@@ -135,8 +117,6 @@ const Dashboard1j = () => {
 							</div>
 						</div>
 					</div>
-
-					{/* ───── range filter (keeps existing styling) ───── */}
 
 					{/* ───── metric cards (same styling as sample) ───── */}
 					{Object.entries(stats.summaryStats).map(([key, metric]) => {
@@ -342,7 +322,7 @@ const Dashboard1j = () => {
 						data={usage}
 					/>
 					<Square
-						title="App Usage"
+						title="Top 5 Network Consumption"
 						total={654}
 						totalTrend={15}
 						totalLabel="Total usage this month"
@@ -350,7 +330,7 @@ const Dashboard1j = () => {
 						data={usage}
 					/>
 					<Square
-						title="App Usage"
+						title="Total Visits"
 						total={654}
 						totalTrend={15}
 						totalLabel="Total usage this month"
@@ -362,7 +342,7 @@ const Dashboard1j = () => {
 
 				{/* Start row 4 */}
 				<div className="row">
-					<Brect />
+					<BeneficiaryOverview />
 					<div className="col-12 col-lg-6 col-xxl-3 d-flex flex-column">
 						<div className="card rounded-4 w-100">
 							<div className="card-body">
