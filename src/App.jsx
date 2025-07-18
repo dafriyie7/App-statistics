@@ -81,7 +81,7 @@ function App() {
 				<Route path="/reset-password" element={<ResetPassword />} />
 
 				{/* Protected Routes (require auth) */}
-				<Route element={<RequireAuth />}>
+				{/* <Route element={<RequireAuth />}> */}
 					<Route path="/" element={<Layout />}>
 						<Route index element={<Dashboard1 />} />
 						<Route path="dashboard" element={<Dashboard1 />} />
@@ -124,7 +124,7 @@ function App() {
 						<Route path="app" element={<AppDetails />} />
 						<Route path="apps/:id" element={<AppDetails />} />
 					</Route>
-				</Route>
+				{/* </Route> */}
 			</Routes>
 		</Router>
 	);
