@@ -74,7 +74,7 @@ const Content = () => {
 					/>
 				</div>
 				<div className="logo-name flex-grow-1">
-					<h5 className="mb-0">AppTracker</h5>
+					<h5 className="mb-0">Telemetry</h5>
 				</div>
 				<div className="sidebar-close">
 					<span className="material-icons-outlined">close</span>
