@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+// src/pages/UserManagement.jsx – edit & delete wired to thunks
+import React, { useEffect, useState, useMemo } from "react";
+import { createSelector } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ManagementTable } from "../components/Table"; // adjust path as needed
-import users from "../components/data/usersData";
+import { ManagementTable } from "../components/Table";
+import CreateUserModal from "../components/CreateUserModal";
+import EditUserModal from "../components/EditUserModal";
+import {
+	fetchUsers,
+	updateUser as updateUserThunk,
+	deleteUser as deleteUserThunk,
+} from "../features/users/usersSlice";
 
-/*********************************************************************
- * User Management Page                                              *
- * ------------------------------------------------------------------*
- *   • Table: avatar, name, email, organization, role, created at    *
- *   • Edit/Delete per row with confirmation                        *
- *   • Add user button                                               *
- *   • Bulk delete, disable, change role                             *
- *   • Filters by name/email                                         *
- *********************************************************************/
-
-const getInitials = (name = "") =>
+const initials = (name = "") =>
 	name
 		.split(" ")
 		.map((w) => w[0])
@@ -21,16 +20,49 @@ const getInitials = (name = "") =>
 		.slice(0, 2)
 		.toUpperCase();
 
-const UserManagement = () => {
+export default function UserManagement() {
 	const navigate = useNavigate();
-	const [userList, setUserList] = useState(users);
+	const dispatch = useDispatch();
 
-	const renderAvatar = (u) => {
-		const src = u.photo || u.avatar || "";
+	// → fetch on mount
+	useEffect(() => {
+		dispatch(fetchUsers());
+	}, [dispatch]);
+
+	const selectUsersData = createSelector(
+		(s) => s.users.list,
+		(list) => list?.data ?? []
+	);
+	const apiUsers = useSelector(selectUsersData);
+
+	const userList = useMemo(() => {
+		return apiUsers.map((u) => ({
+			id: u.id,
+			avatar: u.photo,
+			name:
+				`${u.first_name ?? ""} ${u.last_name ?? ""}`.trim() ||
+				u.username,
+			email: u.email,
+			organisation: u.organization,
+			role: u.roles?.[0]?.name ?? "—",
+			permissions: u.permissions ?? [],
+			enrolled: new Date(u.created_at).toLocaleDateString(),
+			raw: u, // keep original for editing
+		}));
+	}, [apiUsers]);
+
+	// modal state
+	const [showCreate, setShowCreate] = useState(false);
+	const [showEdit, setShowEdit] = useState(false);
+	const [selectedUser, setSelectedUser] = useState(null);
+
+	/* ─ helpers ─ */
+	const renderAvatar = (row) => {
+		const src = row.avatar;
 		return src ? (
 			<img
 				src={src}
-				alt={u.name}
+				alt={row.name}
 				className="rounded-circle object-fit-cover"
 				width={32}
 				height={32}
@@ -40,7 +72,7 @@ const UserManagement = () => {
 				className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
 				style={{ width: 32, height: 32, fontSize: 12 }}
 			>
-				{getInitials(u.name)}
+				{initials(row.name)}
 			</div>
 		);
 	};
@@ -61,7 +93,7 @@ const UserManagement = () => {
 			header: "Permissions",
 			accessor: "permissions",
 			render: (row) =>
-				row.permissions?.length ? (
+				row.permissions.length ? (
 					<div className="d-flex flex-wrap gap-1">
 						{row.permissions.map((p) => (
 							<span key={p} className="badge bg-secondary">
@@ -75,20 +107,45 @@ const UserManagement = () => {
 		},
 	];
 
-	const roleData = userList.map(({ id, name, role, permissions }) => ({
-		id,
-		name,
-		role,
-		permissions,
+	const roleData = userList.map((u) => ({
+		id: u.id,
+		name: u.name,
+		role: u.role,
+		permissions: u.permissions,
 	}));
 
-	const addUser = () => navigate("/users/new");
-	const editUser = (u) => navigate(`/users/${u.id}/edit`);
-	const deleteUser = (id) =>
-		setUserList((prev) => prev.filter((u) => u.id !== id));
-	const bulkDelete = (ids) =>
-		setUserList((prev) => prev.filter((u) => !ids.includes(u.id)));
+	/* ─ CRUD actions ─ */
+	const refresh = () => dispatch(fetchUsers());
 
+	const addUser = () => setShowCreate(true);
+
+	const editUser = (row) => {
+		setSelectedUser(row.raw);
+		setShowEdit(true);
+	};
+
+	const handleEditSuccess = (updatedPayload) => {
+		dispatch(
+			updateUserThunk({ id: updatedPayload.id, data: updatedPayload })
+		)
+			.unwrap()
+			.then(() => {
+				setShowEdit(false);
+				refresh();
+			});
+	};
+
+	const handleDelete = (id) => {
+		dispatch(deleteUserThunk(id)).unwrap().then(refresh);
+	};
+
+	const handleBulkDelete = (ids) => {
+		Promise.all(
+			ids.map((id) => dispatch(deleteUserThunk(id)).unwrap())
+		).then(refresh);
+	};
+
+	/* ─ tabs ─ */
 	const extraTabs = [
 		{
 			id: "roles",
@@ -107,20 +164,34 @@ const UserManagement = () => {
 	];
 
 	return (
-		<ManagementTable
-			title="User Management"
-			data={userList}
-			columns={columns}
-			searchKeys={["name", "email"]}
-			addButtonLabel="Add User"
-			onAdd={addUser}
-			onEdit={editUser}
-			onDelete={deleteUser}
-			onBulkDelete={bulkDelete}
-			rowLink={(u) => navigate(`/users/${u.id}`)}
-			tabs={extraTabs}
-		/>
-	);
-};
+		<>
+			<ManagementTable
+				title="User Management"
+				data={userList}
+				columns={columns}
+				searchKeys={["name", "email"]}
+				addButtonLabel="Add User"
+				onAdd={addUser}
+				onEdit={editUser}
+				onDelete={handleDelete}
+				onBulkDelete={handleBulkDelete}
+				rowLink={(u) => navigate(`/users/${u.id}`)}
+				tabs={extraTabs}
+			/>
 
-export default UserManagement;
+			{/* Modals */}
+			<CreateUserModal
+				open={showCreate}
+				onClose={() => setShowCreate(false)}
+				onSuccess={refresh}
+			/>
+
+			<EditUserModal
+				open={showEdit}
+				user={selectedUser}
+				onClose={() => setShowEdit(false)}
+				onSuccess={handleEditSuccess}
+			/>
+		</>
+	);
+}

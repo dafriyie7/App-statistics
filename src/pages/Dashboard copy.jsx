@@ -30,6 +30,8 @@ const Dashboard1j = () => {
 	const [usage, setUsage] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [range, setRange] = useState("monthly");
+	// for api
+	const []
 
 	const screen = stats.summaryStats.totalScreenTime;
 

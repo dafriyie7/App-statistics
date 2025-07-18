@@ -1,9 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+
+import { loadFromStorage } from "./features/auth/authSlice";
+
 
 // Core styles
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 // Plugin styles
 import "./assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css";
@@ -25,6 +32,7 @@ import "./sass/dark-theme.css";
 
 // import "./light-fix.css";
 
+store.dispatch(loadFromStorage());
 
 
 import "./sass/main.scss";
@@ -32,7 +40,7 @@ import "./sass/main.scss";
 import App from './App.jsx'
 
 createRoot(document.getElementById("root")).render(
-	<StrictMode>
+	<Provider store={store}>
 			<App />
-	</StrictMode>
+	</Provider>
 );

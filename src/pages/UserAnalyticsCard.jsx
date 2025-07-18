@@ -10,7 +10,7 @@ import avatar from "../assets/images/avatars/01.png";
 const UserAnalyticsCard = () => {
 	return (
 		<main className="main-wrapper">
-			<div className="main-content">
+			<div>
 				{/* <!--breadcrumb--> */}
 				<div className="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 					<div className="breadcrumb-title pe-3">Components</div>

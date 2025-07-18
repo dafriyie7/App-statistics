@@ -1,158 +1,226 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import devices from "../components/data/devicedata"; // local dataset — replace with API fetch later
-
-/*********************************************************************
- * DeviceDetails Page                                               *
- * ------------------------------------------------------------------*
- *  Tabs: Summary | Assignment History | Location History           *
- *********************************************************************/
+import {
+	fetchDevice,
+	deleteDevice,
+} from "../features/devices/devicesSlice";
+import { fetchBeneficiary } from "../features/beneficiaries/beneficiariesSlice";
+import EditDeviceModal from "../components/EditDeviceModal"; // ✅ import modal
 
 const DeviceDetails = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	// Match using deviceId instead of numeric id
-	const device = devices.find((d) => d.deviceId === id);
+	const rawDevice = useSelector((state) => state.devices.current);
+	const beneficiaries = useSelector((state) => state.beneficiaries.entities);
 
-	if (!device) return <p className="p-4 text-danger">Device not found</p>;
+	const [assignmentHistory] = useState([]); // placeholder
+	const [locationHistory] = useState([]); // placeholder
+	const [showEditModal, setShowEditModal] = useState(false); // ✅ modal trigger state
 
-	const assignmentHistory = device.assignmentHistory || [];
-	const locationHistory = device.locationHistory || [];
+	useEffect(() => {
+		if (id) dispatch(fetchDevice(id));
+	}, [id, dispatch]);
+
+	useEffect(() => {
+		if (
+			rawDevice?.current_beneficiary_id &&
+			!beneficiaries?.[rawDevice.current_beneficiary_id]
+		) {
+			dispatch(fetchBeneficiary(rawDevice.current_beneficiary_id));
+		}
+	}, [rawDevice, beneficiaries, dispatch]);
+
+	const device = useMemo(() => {
+		if (!rawDevice) return null;
+
+		const benId = rawDevice.current_beneficiary_id;
+		const beneficiary = beneficiaries?.[benId];
+		const beneficiaryName = beneficiary
+			? `${beneficiary.first_name} ${beneficiary.last_name}`
+			: benId
+			? "Loading..."
+			: "—";
+
+		return {
+			deviceId: rawDevice.id,
+			model: rawDevice.device_name,
+			mac: rawDevice.mac_address,
+			status: rawDevice.is_active ? "Active" : "Inactive",
+			organisation: rawDevice.organization,
+			subProgramme: rawDevice.programme,
+			enrolled: new Date(rawDevice.date_enrolled).toLocaleDateString(),
+			lastSync: rawDevice.last_synced
+				? new Date(rawDevice.last_synced).toLocaleString()
+				: "—",
+			beneficiary: beneficiaryName,
+		};
+	}, [rawDevice, beneficiaries]);
+
+	const handleDelete = (deviceId) => {
+		if (window.confirm("Are you sure you want to delete this device?")) {
+			dispatch(deleteDevice(deviceId)).then(() => navigate("/devices"));
+		}
+	};
+
+	if (!device)
+		return <div className="container py-5">Loading device details...</div>;
 
 	return (
 		<div className="container py-4">
-			<button className="btn btn-link mb-3" onClick={() => navigate(-1)}>
+			<button
+				className="btn btn-outline-secondary mb-3"
+				onClick={() => navigate(-1)}
+			>
 				← Back
 			</button>
-			<h4 className="mb-3">Device Details: {device.deviceId}</h4>
 
-			{/* Tabs */}
-			<ul className="nav nav-tabs mb-3" role="tablist">
-				<li className="nav-item">
-					<button
-						className="nav-link active"
-						data-bs-toggle="tab"
-						data-bs-target="#summary"
-						type="button"
-					>
-						Summary
-					</button>
-				</li>
-				<li className="nav-item">
-					<button
-						className="nav-link"
-						data-bs-toggle="tab"
-						data-bs-target="#assign"
-						type="button"
-					>
-						Assignment History
-					</button>
-				</li>
-				<li className="nav-item">
-					<button
-						className="nav-link"
-						data-bs-toggle="tab"
-						data-bs-target="#location"
-						type="button"
-					>
-						Location History
-					</button>
-				</li>
-			</ul>
+			{/* Device Summary Section */}
+			<section className="mb-5">
+				<div className="d-flex justify-content-between align-items-center mb-3">
+					<h4 className="mb-0">Device Summary</h4>
 
-			<div className="tab-content">
-				{/* ── Summary ──────────────────────────── */}
-				<div className="tab-pane fade show active" id="summary">
-					<div className="row g-3">
-						<div className="col-md-4">
-							<strong>Device ID:</strong> {device.deviceId}
-						</div>
-						<div className="col-md-4">
-							<strong>Model:</strong> {device.model}
-						</div>
-						<div className="col-md-4">
-							<strong>Status:</strong> {device.status}
-						</div>
-						<div className="col-md-4">
-							<strong>Organisation:</strong> {device.organisation}
-						</div>
-						<div className="col-md-4">
-							<strong>Sub‑Programme:</strong>{" "}
-							{device.subProgramme}
-						</div>
-						<div className="col-md-4">
-							<strong>Beneficiary:</strong> {device.beneficiary}
-						</div>
-						<div className="col-md-4">
-							<strong>Date Enrolled:</strong> {device.enrolled}
-						</div>
-						<div className="col-md-4">
-							<strong>Last Sync:</strong> {device.lastSync}
+					<div className="d-flex gap-2 align-items-center">
+						<span
+							className={`badge rounded-pill ${
+								device.status === "Active"
+									? "bg-success"
+									: "bg-secondary"
+							}`}
+						>
+							{device.status}
+						</span>
+
+						<div className="btn-group" role="group">
+							<button
+								type="button"
+								className="btn btn-sm btn-outline-primary"
+								title="Edit Device"
+								onClick={() => setShowEditModal(true)} // ✅ OPEN MODAL
+							>
+								<i className="bi bi-pencil-square me-1"></i>
+								Edit
+							</button>
+							<button
+								type="button"
+								className="btn btn-sm btn-outline-danger"
+								title="Delete Device"
+								onClick={() => handleDelete(device.deviceId)}
+							>
+								<i className="bi bi-trash me-1"></i>
+								Delete
+							</button>
 						</div>
 					</div>
 				</div>
 
-				{/* ── Assignment History ───────────────── */}
-				<div className="tab-pane fade" id="assign">
-					{assignmentHistory.length ? (
-						<div className="table-responsive mt-3">
-							<table className="table table-hover table-sm">
-								<thead className="table-light">
-									<tr>
-										<th>Date</th>
-										<th>Assigned To</th>
-										<th>Notes</th>
-									</tr>
-								</thead>
-								<tbody>
-									{assignmentHistory.map((h) => (
-										<tr key={h.date + h.to}>
-											<td>{h.date}</td>
-											<td>{h.to}</td>
-											<td>{h.notes}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+				<div className="card shadow-sm">
+					<div className="card-body">
+						<div className="row g-4">
+							<Info label="Device ID" value={device.deviceId} />
+							<Info label="Model" value={device.model} />
+							<Info label="MAC Address" value={device.mac} />
+							<Info
+								label="Organisation"
+								value={device.organisation}
+							/>
+							<Info
+								label="Sub‑Programme"
+								value={device.subProgramme}
+							/>
+							<Info
+								label="Assigned To"
+								value={device.beneficiary}
+							/>
+							<Info
+								label="Date Enrolled"
+								value={device.enrolled}
+							/>
+							<Info label="Last Sync" value={device.lastSync} />
 						</div>
-					) : (
-						<p className="text-muted mt-3">
-							No assignment history.
-						</p>
-					)}
+					</div>
 				</div>
+			</section>
 
-				{/* ── Location History ─────────────────── */}
-				<div className="tab-pane fade" id="location">
-					{locationHistory.length ? (
-						<div className="table-responsive mt-3">
-							<table className="table table-hover table-sm">
-								<thead className="table-light">
-									<tr>
-										<th>Date</th>
-										<th>Latitude</th>
-										<th>Longitude</th>
-									</tr>
-								</thead>
-								<tbody>
-									{locationHistory.map((l) => (
-										<tr key={l.date + l.lat}>
-											<td>{l.date}</td>
-											<td>{l.lat}</td>
-											<td>{l.lng}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					) : (
-						<p className="text-muted mt-3">No location history.</p>
-					)}
-				</div>
-			</div>
+			{/* Assignment History Section */}
+			<section className="mb-5">
+				<h4 className="mb-3">Assignment History</h4>
+				{assignmentHistory.length ? (
+					<DataTable
+						columns={["Date", "Assigned To", "Notes"]}
+						rows={assignmentHistory.map((a) => [
+							a.date,
+							a.to,
+							a.notes,
+						])}
+					/>
+				) : (
+					<p className="text-muted">
+						No assignment history available.
+					</p>
+				)}
+			</section>
+
+			{/* Location History Section */}
+			<section className="mb-5">
+				<h4 className="mb-3">Location History</h4>
+				{locationHistory.length ? (
+					<DataTable
+						columns={["Date", "Latitude", "Longitude"]}
+						rows={locationHistory.map((l) => [
+							l.date,
+							l.lat,
+							l.lng,
+						])}
+					/>
+				) : (
+					<p className="text-muted">No location history available.</p>
+				)}
+			</section>
+
+			{/* ✅ Edit Modal */}
+			<EditDeviceModal
+				open={showEditModal}
+				onClose={() => setShowEditModal(false)}
+				device={rawDevice}
+				onSuccess={(updated) => {
+					// Optional: refresh view or show toast
+				}}
+			/>
 		</div>
 	);
 };
+
+const Info = ({ label, value }) => (
+	<div className="col-md-6">
+		<div className="small text-muted">{label}</div>
+		<div className="fw-semibold">{value || "—"}</div>
+	</div>
+);
+
+const DataTable = ({ columns, rows }) => (
+	<div className="table-responsive">
+		<table className="table table-hover table-sm align-middle">
+			<thead className="table-light">
+				<tr>
+					{columns.map((c) => (
+						<th key={c}>{c}</th>
+					))}
+				</tr>
+			</thead>
+			<tbody>
+				{rows.map((row, idx) => (
+					<tr key={idx}>
+						{row.map((cell, i) => (
+							<td key={i}>{cell}</td>
+						))}
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+);
 
 export default DeviceDetails;

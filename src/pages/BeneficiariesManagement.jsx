@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ManagementTable } from "../components/Table"; // adjust path as needed
 import users from "../components/data/usersData";
+import CreateBeneficiaryModal from "../components/CreateBeneficiaryModal";
+import EditBeneficiaryModal from "../components/EditBeneficiaryModal";
 
 /*********************************************************************
  * BeneficiariesManagement                                           *
@@ -23,6 +25,9 @@ const getInitials = (name = "") =>
 const BeneficiariesManagement = () => {
 	const navigate = useNavigate();
 	const [beneficiaries, setBeneficiaries] = useState(users);
+	const [showCreateModal, setShowCreateModal] = useState(false);
+	const [showEditModal, setShowEditModal] = useState(false);
+	const [selectedBeneficiary, setSelectedBeneficiary] = useState(null);
 
 	const renderAvatar = (b) =>
 		b.avatar ? (
@@ -66,12 +71,25 @@ const BeneficiariesManagement = () => {
 		status: status || "Active",
 	}));
 
-	const addBeneficiary = () => navigate("/beneficiaries/new");
-	const editBeneficiary = (b) => navigate(`/beneficiaries/${b.id}/edit`);
+	const addBeneficiary = () => setShowCreateModal(true);
+	const editBeneficiary = (b) => {
+		setSelectedBeneficiary(b);
+		setShowEditModal(true);
+	};
 	const deleteBeneficiary = (id) =>
 		setBeneficiaries((prev) => prev.filter((b) => b.id !== id));
 	const bulkDelete = (ids) =>
 		setBeneficiaries((prev) => prev.filter((b) => !ids.includes(b.id)));
+
+	const handleSaveBeneficiary = (newB) => {
+		setBeneficiaries((prev) => [...prev, newB]);
+	};
+
+	const handleEditSave = (updatedB) => {
+		setBeneficiaries((prev) =>
+			prev.map((b) => (b.id === updatedB.id ? updatedB : b))
+		);
+	};
 
 	const extraTabs = [
 		{
@@ -91,19 +109,34 @@ const BeneficiariesManagement = () => {
 	];
 
 	return (
-		<ManagementTable
-			title="Beneficiaries Management"
-			data={beneficiaries}
-			columns={columns}
-			searchKeys={["name", "email", "phone"]}
-			addButtonLabel="Add Beneficiary"
-			onAdd={addBeneficiary}
-			onEdit={editBeneficiary}
-			onDelete={deleteBeneficiary}
-			onBulkDelete={bulkDelete}
-			rowLink={(b) => navigate(`/beneficiaries/${b.id}`)}
-			tabs={extraTabs}
-		/>
+		<>
+			<ManagementTable
+				title="Beneficiaries Management"
+				data={beneficiaries}
+				columns={columns}
+				searchKeys={["name", "email", "phone"]}
+				addButtonLabel="Add Beneficiary"
+				onAdd={addBeneficiary}
+				onEdit={editBeneficiary}
+				onDelete={deleteBeneficiary}
+				onBulkDelete={bulkDelete}
+				rowLink={(b) => navigate(`/beneficiaries/${b.id}`)}
+				tabs={extraTabs}
+			/>
+
+			<CreateBeneficiaryModal
+				open={showCreateModal}
+				onClose={() => setShowCreateModal(false)}
+				onSave={handleSaveBeneficiary}
+			/>
+
+			<EditBeneficiaryModal
+				open={showEditModal}
+				onClose={() => setShowEditModal(false)}
+				beneficiary={selectedBeneficiary}
+				onSave={handleEditSave}
+			/>
+		</>
 	);
 };
 
