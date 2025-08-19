@@ -16,7 +16,7 @@ const ResetPassword = () => {
 		setMessage("");
 		setLoading(true);
 
-		// 🔁 Replace with real API call
+		// Replace with real API call
 		await new Promise((res) => setTimeout(res, 1000));
 
 		if (email.trim() === "") {

@@ -24,55 +24,6 @@ import BeneficiaryDetails from "./components/BeneficiaryDetails";
 
 function App() {
 	return (
-		// <Router>
-		// 	<Routes>
-		// 		{/* Public Routes (No Layout) */}
-		// 		<Route path="/signin" element={<SignIn />} />
-		// 		<Route path="/register" element={<SignUp />} />
-		// 		<Route path="/reset-password" element={<ResetPassword />} />
-
-		// 		{/* Protected Routes (With Layout) */}
-		// 		<Route path="/" element={<Layout />}>
-		// 			<Route index element={<Dashboard1 />} />
-		// 			<Route path="dashboard" element={<Dashboard1 />} />
-		// 			<Route path="user" element={<UserAnalyticsCard />} />
-		// 			<Route
-		// 				path="beneficiaries"
-		// 				element={<BeneficiariesManagement />}
-		// 			/>
-		// 			<Route
-		// 				path="beneficiaries/users"
-		// 				element={<UserManagement />}
-		// 			/>
-		// 			<Route
-		// 				path="beneficiaries/device-management"
-		// 				element={<DeviceManagement />}
-		// 			/>
-		// 			<Route path="users" element={<UserManagement />} />
-		// 			<Route
-		// 				path="device-management"
-		// 				element={<DeviceManagement />}
-		// 			/>
-		// 			<Route
-		// 				path="/beneficiaries/:id/edit"
-		// 				element={<EditBeneficiary />}
-		// 			/>
-		// 			<Route path="/users/:id/edit" element={<EditUser />} />
-		// 			<Route path="devices/:id/edit" element={<EditDevice />} />
-		// 			<Route
-		// 				path="/beneficiaries/new"
-		// 				element={<AddBeneficiary />}
-		// 			/>
-		// 			<Route path="/users/new" element={<AddUser />} />
-		// 			<Route path="devices/:id" element={<DeviceDetails />} />
-		// 			<Route path="devices/new" element={<AddDevice />} />
-		// 			<Route path="devices/new" element={<AddDevice />} />
-		// 			<Route path="apps" element={<AppsUsage />} />
-		// 			<Route path="app" element={<AppDetails />} />
-		// 			<Route path="apps/:id" element={<AppDetails />} />
-		// 		</Route>
-		// 	</Routes>
-		// </Router>
 		<Router>
 			<Routes>
 				{/* Public Routes (No Layout) */}
